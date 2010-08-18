@@ -1,0 +1,190 @@
+#trainer_ui .p0 .icon {
+  background-position: 0px 0px;
+}
+
+#trainer_ui .p1 .icon {
+  background-position: -48px 0px;
+}
+
+#trainer_ui .p2 .icon {
+  background-position: -96px 0px;
+}
+
+#trainer_ui .p3 .icon {
+  background-position: -144px 0px;
+}
+
+#trainer_ui .p4 .icon {
+  background-position: -192px 0px;
+}
+
+#trainer_ui .p5 .icon {
+  background-position: -240px 0px;
+}
+
+#trainer_ui .p6 .icon {
+  background-position: -288px 0px;
+}
+
+#trainer_ui .p7 .icon {
+  background-position: -336px 0px;
+}
+
+#trainer_ui .p8 .icon {
+  background-position: -384px 0px;
+}
+
+#trainer_ui .p9 .icon {
+  background-position: -432px 0px;
+}
+
+#trainer_ui .p10 .icon {
+  background-position: -480px 0px;
+}
+
+#trainer {
+width: 840px;
+margin: 0 auto;
+}
+
+#trainer_metadata .metadata_field {
+  margin-right: 2em;
+  margin-left: 0.5em;
+}
+
+#trainer_metadata label {
+  font-weight: bold;
+}
+
+#trainer_ui .discipline {
+margin: 0.5em 0;
+}
+
+#trainer_ui .discipline .metadata {
+  border-top: 1px #ffffff dashed;
+  border-bottom: 1px #ffffff dashed;
+  border-left: 1px #ffffff dashed;
+float: left;
+margin: 0.5em 0;
+padding: 1px 0.5em 1px 1em;
+}
+
+#trainer_ui .discipline .metadata .name {
+float: left;
+width: 8em;
+position: relative;
+top: 10px;
+}
+
+#trainer_ui .discipline .metadata .icon {
+float: left;
+width: 48px;
+height: 48px;
+}
+
+#trainer_ui .discipline .metadata .controls {
+display: inline-block;
+}
+
+#trainer_ui .power {
+display: inline-block;
+margin: 0.5em 0;
+padding: 1px 0;
+         border-top: 1px #000000 solid;
+         border-bottom: 1px #000000 solid;
+}
+
+#trainer_ui .power.available {
+  border-top: 1px #ffffff solid;
+  border-bottom: 1px #ffffff solid;
+  background-color: #ffffff;
+}
+
+#trainer_ui .power.valid:hover,
+#trainer_ui .power.available:hover {
+  border-top: 1px #efc235 solid;
+  border-bottom: 1px #efc235 solid;
+}
+
+#trainer_ui .power.invalid:hover {
+  border-top: 1px red solid;
+  border-bottom: 1px red solid;
+}
+
+#trainer_ui .power .icon {
+  background-repeat: no-repeat;
+display: inline-block;
+float: left;
+width: 48px;
+height: 48px;
+}
+
+#trainer_ui .power .icon,
+#trainer_ui .power .controls {
+opacity: 0.5;
+filter: alpha(opacity=50);
+}
+
+#trainer_ui .power.available .icon {
+opacity: 0.25;
+filter: alpha(opacity=25);
+}
+
+#trainer_ui .power.activated .icon,
+#trainer_ui .power.available .controls {
+opacity: 1;
+filter: alpha(opacity=100);
+}
+
+#trainer_ui .controls {
+display: inline-block;
+margin: auto 0;
+position: relative;
+top: 16px;
+}
+
+#trainer_ui .level {
+color: #ffffff;
+margin: 0.1em 0.2em;
+        font-size: larger;
+        font-weight: bold;
+        text-align: right;
+        text-shadow: 1px 1px 0px #000000;
+padding: 0.1em;
+position: relative;
+top: 18px;
+}
+
+#trainer_ui .ui-icon {
+  background-image: url('css/themes/inquisition/images/ui-icons_b8ec79_256x240.png');
+}
+
+#trainer_ui .power.available .ui-icon {
+  background-image: url('css/themes/inquisition/images/ui-icons_000000_256x240.png');
+}
+
+#trainer_ui .power.available .ui-icon:hover {
+  background-image: url('css/themes/inquisition/images/ui-icons_b8ec79_256x240.png');
+}
+
+#trainer_ui .power.available .ui-icon.disabled {
+  background-image: url('css/themes/inquisition/images/ui-icons_cccccc_256x240.png');
+}
+
+#trainer_ui .power.available .ui-icon:hover {
+  background-image: url('css/themes/inquisition/images/ui-icons_b8ec79_256x240.png');
+}
+
+#trainer_ui .ui-icon.disabled {
+  background-image: url('css/themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
+}
+
+#trainer_ui .ui-icon.disabled:hover {
+  background-image: url('css/themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
+}
+
+#trainer_ui .ui-icon:hover {
+  background-image: url('css/themes/inquisition/images/ui-icons_ffffff_256x240.png');
+}
+
+
