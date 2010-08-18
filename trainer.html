@@ -18,49 +18,53 @@
     <script type="text/javascript" src="js/jquery.qtip-1.0.min.js"></script>
     <script type="text/javascript" src="js/trainer.js"></script>
     <script type="text/javascript">
+      var T = new TrainerUI();
 
+      $(function() {
+          $('#trainer').hide();
+          $('#trainer_actions a').button();
 
-
-var T = new Trainer(), UI = new TrainerUI(T);
-
-$(function() {
-    $('#trainer_actions a').button();
-    });
-</script>
+          $('#go').click(function() {
+            alert('choz');
+            T.load_data($('#game_version').val(), $('#char_class').val());
+            return false;
+            });
+          });
+    </script>
   </head>
   <body>
     <h2>Trainer Demo</h2>
-      <div id="tool_options ui-widget">
-        <form id="tool_options_form" method="get" action="trainer.html">
-          <ul class="horizontal-list ui-helper-reset ui-helper-clearfix ui-widget-content">
-            <li class="tool_option" widget="game_version">
-                <label>Game Version:</label>
-                <select id="game_version">
-                      <option value="1.6.2">1.6.2 (Live)</option>
-                      <option value="1.7_beta1">Amun</option>
-                </select>
-            </li>
-            <li class="tool_option" widget="class">
-                <label>Class:</label>
-                <select id="char_class">
-                      <option value="">-- Class --</option>
-                      <option>Archer</option>
-                      <option value="Hunter">&raquo; Hunter</option>
-                      <option value="Marksman">&raquo; Marksman</option>
-                      <option>Mage</option>
-                      <option value="Conjurer">&raquo; Conjurer</option>
-                      <option value="Warlock">&raquo; Warlock</option>
-                      <option>Warrior</option>
-                      <option value="Barbarian">&raquo; Barbarian</option>
-                      <option value="Knight">&raquo; Knight</option>
-                </select>
-            </li>
-            <li class="tool_option" widget="go">
-                <button id="go">Go</button>
-            </li>
-          </ul>
-        </form>
-      </div>
+    <div id="tool_options ui-widget">
+      <form id="tool_options_form" method="get" action="trainer.html">
+        <ul class="horizontal-list ui-helper-reset ui-helper-clearfix ui-widget-content">
+          <li class="tool_option" widget="game_version">
+          <label>Game Version:</label>
+          <select id="game_version">
+            <option value="1.6.2">1.6.2 (Live)</option>
+            <option value="1.7_beta1">Amun</option>
+          </select>
+          </li>
+          <li class="tool_option" widget="class">
+          <label>Class:</label>
+          <select id="char_class">
+            <option value="">-- Class --</option>
+            <option>Archer</option>
+            <option value="Hunter">&raquo; Hunter</option>
+            <option value="Marksman">&raquo; Marksman</option>
+            <option>Mage</option>
+            <option value="Conjurer">&raquo; Conjurer</option>
+            <option value="Warlock">&raquo; Warlock</option>
+            <option>Warrior</option>
+            <option value="Barbarian">&raquo; Barbarian</option>
+            <option value="Knight">&raquo; Knight</option>
+          </select>
+          </li>
+          <li class="tool_option" widget="go">
+            <button id="go">Go</button>
+          </li>
+        </ul>
+      </form>
+    </div>
     <div id="trainer">
       <div id="trainer_metadata">
         <span class="metadata_field discipline_points">

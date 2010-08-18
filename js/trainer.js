@@ -19,12 +19,16 @@ function Trainer() {
 
   this.config = {};
 
-  this.load_data = function(version, klass, level) {
-    var self = this;
+  this.load_data = function(version, klass, level_, callback_) {
+    var self = this,
+        level = $.isFunction(level_) ? null : level_,
+        callback = $.isFunction(level_) ? level_ : callback_;
+
     set_version(version);
     set_character_class(klass);
     $.getJSON(resource_path + "/trainerdata.json", function(data, status_message) {
         set_config(data, level);
+        if ($.isFunction(callback)) { callback.apply(self); }
         });
   }
 
@@ -187,8 +191,8 @@ function Trainer() {
   }
 }
 
-function TrainerUI(setup_) {
-  var setup = setup_;
+function TrainerUI() {
+  this.setup = null;
 
   this.set_discipline_level = function(discipline, value) {
     setup.set_discipline_level(discipline, value);
@@ -196,8 +200,9 @@ function TrainerUI(setup_) {
   }
 
   this.load_data = function(game_version, character_class) {
-    this.setup = new Setup(game_version, character_class);
-    reset_ui();
+    this.setup = new Setup(game_version, character_class, function() {
+        reset_ui();
+        });
   }
 
   this.reset_controls = function() {
