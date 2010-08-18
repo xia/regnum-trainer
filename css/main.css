@@ -1,0 +1,588 @@
+/**
+ * @copyright Copyright 2010
+ * @author Xia
+ * @author Edward Rudd <urkle at outoforder.cc>
+ */
+/*
+ * This file is part of INQ Calculators and is covered under the AGPL v3
+ */
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font: 85% Georgia, serif;
+    line-height: 2.2em;
+    background-color: #000000;
+    color: #EFC235;
+    cursor: url('../images/normal.cur'), default;
+}
+
+label {
+    cursor: url('../images/normal.cur'), default;
+}
+
+a { 
+    text-decoration: none;
+    color: #EFC325;
+}
+
+a:hover, a:active { 
+    text-decoration: underline;
+    color: #FFFFFF;
+    cursor: url('../images/links.cur'), pointer !important;
+}
+
+
+/* Make Option Font Styles Consistent */
+
+option, optgroup, optgroup > option {
+    font-family: inherit !important;
+}
+
+#header {
+    text-align: center;
+}
+
+#main {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+    border: none;
+    background: transparent none;
+}
+
+h2 {
+    text-align: center;
+}
+
+ul.legend {
+    list-style: url('../images/gem.png');
+    color: #EFC235;
+}
+
+ul.navigation {
+    background-color: transparent;
+    background-image: none;
+    border: none;
+    float: left;
+    position: relative;
+    left: 50%;
+    list-style: none;
+    list-style-type: none;
+    text-align: left;
+    padding: 0 !important;
+    margin: 0 auto;
+}
+
+ul.navigation li {
+    float: left;
+    position: relative;
+    left: -50%;
+    font-weight: bold;
+    padding: 0.2em 1em;
+    padding-bottom: 0 !important;
+    background-image: url('../images/menu-gradient.png') !important;
+    background-repeat: repeat-x;
+    background-position: 0 0 !important;
+    margin: 0 !important;
+}
+
+ul.navigation li.first-item {
+    padding-left: 38px;
+    background-image: url('../images/menu-left.png') !important;
+    background-repeat: no-repeat;
+}
+
+ul.navigation li.last-item {
+    padding-right: 38px;
+    background-image: url('../images/menu-right.png') !important;
+    background-repeat: no-repeat;
+    background-position: top right !important;
+}
+
+.ui-tabs .ui-tabs-hide {
+    display: none;
+}
+
+ul.navigation li.ui-state-default, ul.navigation li.ui-state-active {
+    border: none;
+    background-color: transparent;
+    color: #EFC235;
+    padding-bottom: 0px;
+}
+
+ul.navigation li.ui-state-default a, ul.navigation li.ui-state-active a {
+    color: #EFC235;
+}
+ul.navigation li.ui-state-hover a {
+    text-shadow: 0px 0px 1em white, 0px 0px 0.2em white;
+}
+
+div.content {
+    clear: left;
+    width: 60%;
+    margin: 0 auto;
+}
+
+div.content.ui-tabs-panel {
+    padding: 0;
+}
+
+div.content.ui-widget-content {
+    color: #EFC235;
+}
+
+div.content.ui-widget-content a {
+    color: #EFC235;
+}
+div.content.ui-widget-content a:hover {
+    text-shadow: 0px 0px 1em white, 0px 0px 0.2em white;
+}
+/** horizontal UL */
+.horizontal-list {
+    list-style: none;
+    position: relative;
+}
+.horizontal-list li {
+    float: left;
+}
+
+
+/* Home section styles */
+
+ul.legend a {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/** horizontal UL */
+.horizontal-list {
+    list-style: none;
+    position: relative;
+}
+.horizontal-list li {
+    float: left;
+}
+
+
+/* Result Set Styles */
+
+.results > table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.results > table > thead > tr > th {
+    text-align: left;
+}
+
+.search_results {
+  color: #CCCCCC;
+  padding-left: 0.5em;
+}
+
+.search_results th {
+  color: #EFC235;
+}
+
+.search_results .even {
+  background: #333333;
+}
+
+.search_result_row, .search_result_detail, .pointer {
+  cursor: url('../images/links.cur'), pointer;
+}
+
+.search_result_detail {
+  font-size: 85%;
+}
+
+.toggle_icon {
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+  background-position: 0 -192px;
+  background-image: url(themes/inquisition/images/ui-icons_9fda58_256x240.png);
+}
+
+.search_result_row:hover {
+  color: #FFFFFF;
+}
+
+.search_result_row:hover .toggle_icon {
+  background-image: url(themes/inquisition/images/ui-icons_ffffff_256x240.png);
+}
+
+.expanded .toggle_icon {
+  background-position: -16px -192px;
+}
+
+
+/* Tool Options */
+
+#tool_options {
+    clear: left;
+    width: 60%;
+    margin: 0 auto;
+    color: #EFC235;
+    padding: 0;
+}
+
+.tool_option {
+    padding: 0.5em 0 0.5em 0.5em;
+}
+
+.tool_popup {
+    display: none;
+}
+
+.tool_option label, .tool_popup_button {
+    cursor: url('../images/links.cur'), pointer;
+}
+.tool_option input, .tool_option button {
+    margin:0px;
+}
+.tool_popup_wrapper {
+    position:absolute;
+    background-color: black;
+    border: 1px solid #EFC235;
+    display: none;
+}
+.tool_value {
+    font-size: 110%;
+    color: white;
+}
+
+.tool_popup.ui-slider-horizontal {
+    margin: 0.5em auto;
+    width: 95%;
+}
+
+.ui-slider-horizontal .ui-slider-marker {
+    background-color: #555555;
+    height: 1.35em;
+    position: absolute;
+    top: -0.3em;
+    width: 0.2em;
+    z-index: 1;
+}
+
+.mapWidget-point {
+    cursor: url('../images/links.cur'), pointer !important;
+}
+
+
+/* Regnum Interactive Map Widget */
+
+.ROMap {
+    width: 199px;
+    height: 186px;
+}
+.ROMapDesc {
+    width: 199px;
+}
+.ROMapImage {
+    background-image: url('../images/ro_map-200.png');
+}
+
+.ROMapImage.map {
+    left: 0px;
+    top: 0px;
+    width: 199px;
+    height: 186px;
+}
+
+
+/* Syrtis */
+
+.ROMapImage.syrtis-iz {
+    background-position: -268px -17px;
+    height: 25px;
+    left: 17px;
+    top: 151px;
+    width: 46px;
+}
+
+.ROMapImage.syrtis-ir {
+    background-position: -255px -67px;
+    height: 58px;
+    left: 34px;
+    top: 109px;
+    width: 69px;
+}
+
+.ROMapImage.syrtis-wz {
+    background-position: -253px -156px;
+    height: 65px;
+    left: 51px;
+    top: 86px;
+    width: 75px;
+}
+
+
+/* Ignis */
+
+.ROMapImage.ignis-iz {
+    background-position: -6px -300px;
+    height: 57px;
+    left: 133px;
+    top: 11px;
+    width: 50px;
+}
+
+.ROMapImage.ignis-ir {
+    background-position: -83px -296px;
+    height: 64px;
+    left: 113px;
+    top: 26px;
+    width: 59px;
+}
+
+.ROMapImage.ignis-wz {
+    background-position: -164px -287px;
+    height: 83px;
+    left: 94px;
+    top: 41px;
+    width: 56px;
+}
+
+
+/* Alsius */
+
+.ROMapImage.alsius-iz {
+    background-position:-9px -222px;
+    height:34px;
+    left:16px;
+    top:12px;
+    width:42px;
+}
+
+.ROMapImage.alsius-ir {
+    background-position:-65px -210px;
+    height:61px;
+    left:17px;
+    top:28px;
+    width:59px;
+}
+
+.ROMapImage.alsius-wz {
+    background-position:-141px -210px;
+    height:59px;
+    left:46px;
+    top:34px;
+    width:58px;
+}
+
+
+/* Crests */
+
+#realm_crests {
+    padding-left: 3px;
+}
+#realm_crests li.label {
+    line-height: 41px;
+    color: white;
+    padding: 0 2px;
+}
+#realm_crests li.selected, #realm_wz.selected {
+    color: #EFC235;
+}
+#realm_wz {
+    color: white;
+    display: block;
+    text-align: center;
+}
+.ROCrests {
+    background-image: url(../images/crests.png);
+}
+.ROCrests.alsius {
+    height: 41px;
+    width: 30px;
+    background-position: -28px -41px;
+}
+.ROCrests.alsius.selected {
+    background-position: -28px 0;
+}
+.ROCrests.ignis {
+    height: 41px;
+    width: 28px;
+    background-position: 0 -41px;
+}
+.ROCrests.ignis.selected {
+    background-position: 0 0;
+}
+.ROCrests.syrtis {
+    height: 41px;
+    width: 22px;
+    background-position: -58px -41px;
+}
+.ROCrests.syrtis.selected {
+    background-position: -58px 0;
+}
+
+
+/* Challenge Ratings */
+
+.difficulty.unchallenging {
+    color: #c8c8c8;
+}
+.difficulty.very_easy {
+    color: #a6de98;
+}
+.difficulty.easy {
+    color: #88f980;
+}
+.difficulty.normal {
+    color: #88a3fc;
+}
+.difficulty.challenging {
+    color: #fffb48;
+}
+.difficulty.hard {
+    color: #fb8437;
+}
+.difficulty.very_hard {
+    color: #fa4532;
+}
+.difficulty.impossible {
+    color: #a148ec;
+}
+
+
+/* Zone Summary Icons */
+
+.zone-icon {
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background-image: url(../images/zoneshields.png);
+}
+.zone-icon.alsius_inner {
+    background-position: 0 0;
+}
+.zone-icon.alsius_warzone {
+    background-position: 0 -24px;
+}
+.zone-icon.ignis_inner {
+    background-position: -24px 0;
+}
+.zone-icon.ignis_warzone {
+    background-position: -24px -24px;
+}
+.zone-icon.syrtis_inner {
+    background-position: -48px 0;
+}
+.zone-icon.syrtis_warzone {
+    background-position: -48px -24px;
+}
+/* Interactive World Map */
+#RO_InteractiveMap {
+    width: 600px;
+    height: 450px;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+/** Trainer */
+#trainer_tool .discipline {
+    margin: 5px 0px;
+}
+#trainer_tool label {
+    float: left;
+    width: 8em;
+    line-height: 48px;
+}
+#trainer_tool .info {
+    float: left;
+    width: 8em;
+    display: inline-block;
+    line-height: 48px;
+}
+#trainer_tool .power {
+    position: absolute;
+    width: 50%;
+    top: 50%;
+    left: 0;
+    line-height: 24px;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    -moz-border-radius: 12px 12px 12px 0;
+    -webkit-border-radius: 12px 12px 12px 0;
+    background-color: #F5DEB3;
+    color: #111111;
+    opacity: 0.7;
+}
+#trainer_tool .powerbutton {
+    position: absolute;
+    background-image: url(../images/arrows-half.png);
+    width: 16px;
+    height: 48px;
+    left: 32px;
+    top: 0px;
+}
+#trainer_tool .spell_wrapper {
+    position: relative;
+    float: left;
+    margin: 0px 5px;
+    background-color: gray;
+}
+#trainer_tool .spell {
+    width: 48px;
+    height: 48px;
+    opacity: 0.3;
+    filter: alpha(opacity=30);
+}
+#trainer_tool .active {
+    opacity: 1;
+}
+
+/** Spell Qtip */
+.qtip-TrainerSpell div.wrapper .description {
+    line-height: 1em;
+    white-space: pre-wrap;
+    color: #cccccc;
+    margin-bottom:0.5em;
+}
+.qtip-TrainerSpell div.wrapper div {
+    line-height: 1.2em;
+    white-space: nowrap;
+}
+.qtip-TrainerSpell .damage {
+    color: #F2F273;
+}
+.qtip-TrainerSpell .buffs {
+    color: #4093E6;
+}
+.qtip-TrainerSpell .debuffs {
+    color: #F19999;
+}
+.qtip-TrainerSpell .active {
+    color: blue;
+    font-weight: bold;
+}
+
+/** Credits Scroller */
+#credit_scroller {
+    height: 8em;
+    position: relative;
+    overflow: hidden;
+}
+.credit {
+    display: none;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+}
+.credit .name {
+    color: blue;
+    font-weight: bold;
+}
+.credit .job {
+    color: white;
+    font-size: 75%;
+    font-weight: lighter;
+}
