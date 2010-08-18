@@ -17,6 +17,10 @@
     <script type="text/javascript" src="js/jquery.qtip-1.0.min.js"></script>
     <script type="text/javascript" src="js/trainer.js"></script>
     <style type="text/css">
+      #tool_options {
+        text-align: center;
+      }
+
       #trainer_ui .discipline_ShortBows .icon {
         background-image: url('trainer/1.7_beta1/icons/ShortBows.jpg');
       }
@@ -351,6 +355,36 @@ $(function() {
 </script>
   </head>
   <body>
+    <h2>Trainer Demo</h2>
+      <div id="tool_options ui-widget">
+        <ul class="horizontal-list ui-helper-reset ui-helper-clearfix ui-widget-content">
+          <li class="tool_option" widget="game_version">
+              <label>Game Version:</label>
+              <select id="game_version">
+                    <option value="1.6.2">1.6.2 (Live)</option>
+                    <option value="1.7_beta1">Amun</option>
+              </select>
+          </li>
+          <li class="tool_option" widget="class">
+              <label>Class:</label>
+              <select id="char_class">
+                    <option value="">-- Class --</option>
+                    <option>Archer</option>
+                    <option value="Hunter">&raquo; Hunter</option>
+                    <option value="Marksman">&raquo; Marksman</option>
+                    <option>Mage</option>
+                    <option value="Conjurer">&raquo; Conjurer</option>
+                    <option value="Warlock">&raquo; Warlock</option>
+                    <option>Warrior</option>
+                    <option value="Barbarian">&raquo; Barbarian</option>
+                    <option value="Knight">&raquo; Knight</option>
+              </select>
+          </li>
+          <li class="tool_option" widget="go">
+              <button id="go">Go</button>
+          </li>
+        </ul>
+      </div>
     <div id="trainer">
       <div id="trainer_metadata">
         <span class="metadata_field discipline_points">
