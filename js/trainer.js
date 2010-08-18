@@ -186,3 +186,113 @@ function Trainer() {
     return character_level;
   }
 }
+
+function TrainerUI(setup_) {
+  var setup = setup_;
+
+  this.set_discipline_level = function(discipline, value) {
+    setup.set_discipline_level(discipline, value);
+    reset_controls();
+  }
+
+  this.load_data = function(game_version, character_class) {
+    this.setup = new Setup(game_version, character_class);
+    reset_ui();
+  }
+
+  this.reset_controls = function() {
+    var self = this, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+
+    metadata.find('.discipline_points .used').text(setup.config.discipline_points_used);
+    metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
+    metadata.find('.power_points .used').text(setup.config.power_points_used);
+    metadata.find('.power_points .total').text(setup.config.power_points_total);
+    metadata.find('.level').text(setup.get_character_level());
+
+    $('.discipline').each(function(index, element) {
+        var discipline_name = $(element).find('.name').text(),
+            discipline = setup.config.disciplines[discipline_name];
+
+        $(element).find('.level').text(discipline.current_level);
+
+        if (setup.config.min_discipline_level == discipline.current_level) {
+          $(element).find('.metadata .ui-icon-triangle-1-n').removeClass('disabled');
+          $(element).find('.metadata .ui-icon-triangle-1-s').addClass('disabled');
+        } else if (setup.config.max_discipline_level == discipline.current_level) {
+          $(element).find('.metadata .ui-icon-triangle-1-n').addClass('disabled');
+          $(element).find('.metadata .ui-icon-triangle-1-s').removeClass('disabled');
+        } else {
+          $(element).find('.metadata .ui-icon').removeClass('disabled');
+        }
+
+        $(element).find('.power').each(function(power_index, element) {
+          var power_level = power_index * 2 + 1;
+          power_limit = setup.power_limit(discipline, power_index),
+          power = discipline.spells[power_index];
+
+          $(element).find('.level').text(power.current_level);
+
+          /* redraw icons */
+          $(element).removeClass('available activated valid invalid');
+          if (power_level <= discipline.current_level) {
+            $(element).addClass('available');
+            if (power.current_level > 0) {
+              $(element).addClass('activated');
+            }
+          }
+
+          if (setup.valid_discipline_level(discipline, power_index + 1)) {
+            $(element).addClass('valid');
+          } else {
+            $(element).addClass('invalid');
+          }
+
+          /* redraw controls */
+          $(element).find('.ui-icon').removeClass('disabled');
+          if (setup.config.min_power_level == power.current_level) {
+            $(element).find('.ui-icon-triangle-1-s').addClass('disabled');
+          }
+          if (power.current_level == power_limit) {
+            $(element).find('.ui-icon-triangle-1-n').addClass('disabled');
+          }
+        });
+    });
+  }
+
+  this.reset_ui = function() {
+    var metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+
+    ui.empty();
+    $.each(setup.config.disciplines, function(discipline_name, discipline) {
+        var dword = discipline_name.replace(/ /g, '_'),
+          name_block = $('<div>').addClass('name'),
+          icon_block = $('<div>').addClass('icon')
+            .css('background-image', "url('" + discipline.icon_path + "')")
+            .append($('<div>').addClass('level')),
+          control_block = $('<div>').addClass('ui-icon'),
+          controls_block = $('<div>').addClass('controls')
+            .append(control_block.clone().addClass('ui-icon-triangle-1-n'))
+            .append(control_block.clone().addClass('ui-icon-triangle-1-s')),
+          powers_block = $('<div>').addClass('powers'),
+          discipline_block = $('<div>').addClass('discipline discipline_' + dword);
+
+
+        discipline_block.append($('<div>').addClass('metadata')
+          .append(name_block.text(discipline_name))
+          .append(icon_block.clone())
+          .append(controls_block.clone())
+          );
+
+        for (p = 1; p <= 10; p++) {
+          block = $('<div>').addClass('power p' + p);
+          block.append(icon_block.clone());
+          block.append(controls_block.clone());
+          powers_block.append(block);
+        }
+
+        discipline_block.append(powers_block);
+        ui.append(discipline_block);
+      });
+  }
+}
+
