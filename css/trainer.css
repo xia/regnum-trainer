@@ -43,8 +43,9 @@
 }
 
 #trainer {
-width: 840px;
-margin: 0 auto;
+  clear: both;
+  width: 840px;
+  margin: 0 auto;
 }
 
 #trainer_metadata .metadata_field {
@@ -57,7 +58,7 @@ margin: 0 auto;
 }
 
 #trainer_ui .discipline {
-margin: 0.5em 0;
+  margin: 0.5em 0;
 }
 
 #trainer_ui .discipline .metadata {
@@ -70,28 +71,28 @@ padding: 1px 0.5em 1px 1em;
 }
 
 #trainer_ui .discipline .metadata .name {
-float: left;
-width: 8em;
-position: relative;
-top: 10px;
+  float: left;
+  width: 8em;
+  position: relative;
+  top: 10px;
 }
 
 #trainer_ui .discipline .metadata .icon {
-float: left;
-width: 48px;
-height: 48px;
+  float: left;
+  width: 48px;
+  height: 48px;
 }
 
 #trainer_ui .discipline .metadata .controls {
-display: inline-block;
+  display: inline-block;
 }
 
 #trainer_ui .power {
-display: inline-block;
-margin: 0.5em 0;
-padding: 1px 0;
-         border-top: 1px #000000 solid;
-         border-bottom: 1px #000000 solid;
+  display: inline-block;
+  margin: 0.5em 0;
+  padding: 1px 0;
+  border-top: 1px #000000 solid;
+  border-bottom: 1px #000000 solid;
 }
 
 #trainer_ui .power.available {
@@ -113,46 +114,46 @@ padding: 1px 0;
 
 #trainer_ui .power .icon {
   background-repeat: no-repeat;
-display: inline-block;
-float: left;
-width: 48px;
-height: 48px;
+  display: inline-block;
+  float: left;
+  width: 48px;
+  height: 48px;
 }
 
 #trainer_ui .power .icon,
 #trainer_ui .power .controls {
-opacity: 0.5;
-filter: alpha(opacity=50);
+  opacity: 0.5;
+  filter: alpha(opacity=50);
 }
 
 #trainer_ui .power.available .icon {
-opacity: 0.25;
-filter: alpha(opacity=25);
+  opacity: 0.25;
+  filter: alpha(opacity=25);
 }
 
 #trainer_ui .power.activated .icon,
 #trainer_ui .power.available .controls {
-opacity: 1;
-filter: alpha(opacity=100);
+  opacity: 1;
+  filter: alpha(opacity=100);
 }
 
 #trainer_ui .controls {
-display: inline-block;
-margin: auto 0;
-position: relative;
-top: 16px;
+  display: inline-block;
+  margin: auto 0;
+  position: relative;
+  top: 16px;
 }
 
 #trainer_ui .level {
-color: #ffffff;
-margin: 0.1em 0.2em;
-        font-size: larger;
-        font-weight: bold;
-        text-align: right;
-        text-shadow: 1px 1px 0px #000000;
-padding: 0.1em;
-position: relative;
-top: 18px;
+  color: #ffffff;
+  margin: 0.1em 0.2em;
+  font-size: larger;
+  font-weight: bold;
+  text-align: right;
+  text-shadow: 1px 1px 0px #000000;
+  padding: 0.1em;
+  position: relative;
+  top: 18px;
 }
 
 #trainer_ui .ui-icon {
