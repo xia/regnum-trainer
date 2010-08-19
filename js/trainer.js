@@ -192,21 +192,26 @@ function Trainer() {
 }
 
 function TrainerUI() {
-  this.setup = null;
+  var self = this;
+
+  this.setup = new Trainer();
 
   this.set_discipline_level = function(discipline, value) {
-    setup.set_discipline_level(discipline, value);
+    self.setup.set_discipline_level(discipline, value);
     reset_controls();
   }
 
-  this.load_data = function(game_version, character_class) {
-    this.setup = new Setup(game_version, character_class, function() {
-        reset_ui();
-        });
+  this.load_data = function(game_version, character_class, callback) {
+    this.setup.load_data(game_version, character_class, function() {
+      self.reset_ui();
+      if ($.isFunction(callback)) {
+        callback.apply(self);
+      }
+    });
   }
 
   this.reset_controls = function() {
-    var self = this, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+    var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
     metadata.find('.discipline_points .used').text(setup.config.discipline_points_used);
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
@@ -265,7 +270,7 @@ function TrainerUI() {
   }
 
   this.reset_ui = function() {
-    var metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+    var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
     ui.empty();
     $.each(setup.config.disciplines, function(discipline_name, discipline) {
