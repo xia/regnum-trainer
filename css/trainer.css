@@ -157,35 +157,35 @@ padding: 1px 0.5em 1px 1em;
 }
 
 #trainer_ui .ui-icon {
-  background-image: url('css/themes/inquisition/images/ui-icons_b8ec79_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_b8ec79_256x240.png');
 }
 
 #trainer_ui .power.available .ui-icon {
-  background-image: url('css/themes/inquisition/images/ui-icons_000000_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_000000_256x240.png');
 }
 
 #trainer_ui .power.available .ui-icon:hover {
-  background-image: url('css/themes/inquisition/images/ui-icons_b8ec79_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_b8ec79_256x240.png');
 }
 
 #trainer_ui .power.available .ui-icon.disabled {
-  background-image: url('css/themes/inquisition/images/ui-icons_cccccc_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_cccccc_256x240.png');
 }
 
 #trainer_ui .power.available .ui-icon:hover {
-  background-image: url('css/themes/inquisition/images/ui-icons_b8ec79_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_b8ec79_256x240.png');
 }
 
 #trainer_ui .ui-icon.disabled {
-  background-image: url('css/themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
 }
 
 #trainer_ui .ui-icon.disabled:hover {
-  background-image: url('css/themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
 }
 
 #trainer_ui .ui-icon:hover {
-  background-image: url('css/themes/inquisition/images/ui-icons_ffffff_256x240.png');
+  background-image: url('themes/inquisition/images/ui-icons_ffffff_256x240.png');
 }
 
 
