@@ -305,6 +305,8 @@ function TrainerUI() {
         discipline_block.append(powers_block);
         ui.append(discipline_block);
       });
+
+    self.reset_controls();
   }
 }
 
