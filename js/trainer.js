@@ -134,27 +134,27 @@ function Trainer() {
   }
 
   this.reset_powers = function() {
-    $.each(config.disciplines, function(index, discipline) {
-        this.set_discipline_level(discipline.name, config.min_discipline_level);
+    $.each(self.config.disciplines, function(index, discipline) {
+        this.set_discipline_level(discipline.name, self.config.min_discipline_level);
         $.each(discipline.spells, function(index, power) {
-          this.set_power_level(discipline.name, index + 1, config.min_power_level);
+          this.set_power_level(discipline.name, index + 1, self.config.min_power_level);
           });
         });
     reset_points();
   }
 
   this.set_discipline_level = function(discipline_name, level) {
-    var discipline = this.config.disciplines[discipline_name];
+    var discipline = self.config.disciplines[discipline_name];
     if (discipline) {
-      discipline.current_level = Math.min(level, this.config.max_discipline_level);
+      discipline.current_level = Math.min(level, self.config.max_discipline_level);
       discipline.current_power_limit =
-        this.config.max_power_level[discipline.current_level-1];
+        self.config.max_power_level[discipline.current_level-1];
       reset_points();
     }
   }
 
   this.set_power_level = function(discipline_name, power_index, level) {
-    var discipline = this.config.disciplines[discipline_name];
+    var discipline = self.config.disciplines[discipline_name];
     if (discipline) {
       power = discipline.spells[power_index-1];
       power.current_level = Math.min(level, discipline.current_power_limit);
