@@ -200,7 +200,12 @@ function TrainerUI() {
 
   this.set_discipline_level = function(discipline_name, level) {
     self.setup.set_discipline_level(discipline_name, level);
-    reset_controls();
+    self.reset_controls();
+  }
+
+  this.set_power_level = function(discipline_name, power_index, level) {
+    self.setup.set_power_level(discipline_name, power_index, level);
+    self.reset_controls();
   }
 
   this.load_data = function(game_version, character_class, callback) {
