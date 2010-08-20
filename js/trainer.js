@@ -20,8 +20,7 @@ function Trainer() {
   this.config = {};
 
   this.load_data = function(version, klass, level_, callback_) {
-    var self = this,
-        level = $.isFunction(level_) ? null : level_,
+    var level = $.isFunction(level_) ? null : level_,
         callback = $.isFunction(level_) ? level_ : callback_;
 
     set_version(version);
