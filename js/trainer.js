@@ -170,12 +170,12 @@ function Trainer() {
   }
 
   this.discipline_point_cost = function(discipline, level) {
-    return this.config.discipline_required_points[level-1]
-      - this.config.discipline_required_points[discipline.current_level-1];
+    return self.config.discipline_required_points[level-1]
+      - self.config.discipline_required_points[discipline.current_level-1];
   }
 
   this.discipline_points_left = function() {
-    return this.config.discipline_points_total - this.config.discipline_points_used;
+    return self.config.discipline_points_total - self.config.discipline_points_used;
   }
 
   this.set_character_level = function(level) {
