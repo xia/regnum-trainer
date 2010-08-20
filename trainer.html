@@ -24,8 +24,8 @@
           $('#trainer').hide();
           $('#trainer_actions a').button();
 
-          $('#go').click(function() {
-            $('#trainer').fadeOut();
+          $('#tool_option_submit').click(function() {
+            $('#trainer').hide();
             T.load_data($('#game_version').val(), $('#char_class').val(),
               function() {
                 $('#trainer').fadeIn();
@@ -66,7 +66,7 @@
             </select>
             </li>
             <li class="tool_option" widget="go">
-              <button id="go">Go</button>
+              <input type="submit" name="submit" value="Load" id="tool_option_submit" />
             </li>
           </ul>
         </form>
