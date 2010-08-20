@@ -65,14 +65,14 @@
   border-top: 1px #ffffff dashed;
   border-bottom: 1px #ffffff dashed;
   border-left: 1px #ffffff dashed;
-float: left;
-margin: 0.5em 0;
-padding: 1px 0.5em 1px 1em;
+  float: left;
+  margin: 0.5em 0;
+  padding: 1px 0.5em 1px 1em;
 }
 
 #trainer_ui .discipline .metadata .name {
   float: left;
-  width: 8em;
+  width: 10em;
   position: relative;
   top: 10px;
 }
