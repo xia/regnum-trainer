@@ -198,8 +198,8 @@ function TrainerUI() {
 
   this.setup = new Trainer();
 
-  this.set_discipline_level = function(discipline, value) {
-    self.setup.set_discipline_level(discipline, value);
+  this.set_discipline_level = function(discipline_name, level) {
+    self.setup.set_discipline_level(discipline_name, level);
     reset_controls();
   }
 
