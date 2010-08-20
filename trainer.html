@@ -25,6 +25,7 @@
           $('#trainer_actions a').button();
 
           $('#go').click(function() {
+            $('#trainer').fadeOut();
             T.load_data($('#game_version').val(), $('#char_class').val(),
               function() {
                 $('#trainer').fadeIn();
