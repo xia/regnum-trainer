@@ -182,8 +182,10 @@ function Trainer() {
     var level = parseInt(level);
     if (!isNaN(level)) { 
       character_level = Math.min(level, max_character_level);
-      reset_limits();
+    } else {
+      character_level = max_character_level;
     }
+    reset_limits();
   }
 
   this.get_character_level = function() {
