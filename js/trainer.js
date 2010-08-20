@@ -253,7 +253,7 @@ function TrainerUI() {
             }
           }
 
-          if (setup.valid_discipline_level(discipline, power_index + 1)) {
+          if (setup.valid_discipline_level(discipline, (power_index * 2) + 1)) {
             $(element).addClass('valid');
           } else {
             $(element).addClass('invalid');
