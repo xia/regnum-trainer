@@ -416,10 +416,10 @@ function TrainerUI() {
       }
     }
     if (power.buffs) {
-      specs.append(spec_block('Buffs', power.buffs).addClass('buffs'));
+      specs.append(spec_block('', power.buffs).addClass('buffs'));
     }
     if (power.debuffs) {
-      specs.append(spec_block('Debuffs', power.debuffs).addClass('debuffs'));
+      specs.append(spec_block('', power.debuffs).addClass('debuffs'));
     }
 
     tooltip.append(specs);
@@ -427,8 +427,11 @@ function TrainerUI() {
     return tooltip;
   }
 
-  function spec_block(name, v) {
-    var value = $('<div>');
+  function spec_block(k, v) {
+    var block = $('<div>'),
+        name = $('<label>').text(k + ':').addClass('spec_label'),
+        value = $('<div>');
+
 
     if (typeof v == 'string' || typeof v == 'number') {
       value.append(v);
@@ -438,6 +441,7 @@ function TrainerUI() {
           value.append(block)
           });
     } else {
+      name.removeClass('spec_label');
       for (var spec in v) {
         if (v[spec] === true) {
           value.append(spec);
@@ -447,9 +451,8 @@ function TrainerUI() {
       }
     }
 
-    return $('<div>')
-      .append($('<label>').text(name + ':'))
-      .append(value);
+    if (k) { block.append(name); }
+    return block.append(value);
   }
 
   function spec_level_map(value, index) {
