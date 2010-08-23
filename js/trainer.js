@@ -379,10 +379,29 @@ function TrainerUI() {
   }
 
   this.increase_power_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Power is at maximum level');
+    } else {
+      var discipline = $(this).parents('.discipline'),
+          discipline_name = discipline.find('.name').text();
+          power = $(this).parents('.power'),
+          power_index = discipline.find('.power').index(power) + 1,
+          power_level = parseInt(power.find('.level').text());
+      self.set_power_level(discipline_name, power_index, power_level + 1);
+    }
   }
 
   this.decrease_power_level = function(source) {
-    alert('dec!');
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Power is at minimum level');
+    } else {
+      var discipline = $(this).parents('.discipline'),
+          discipline_name = discipline.find('.name').text();
+          power = $(this).parents('.power'),
+          power_index = discipline.find('.power').index(power) + 1,
+          power_level = parseInt(power.find('.level').text());
+      self.set_power_level(discipline_name, power_index, power_level - 1);
+    }
   }
 
   this.reset_ui = function() {
