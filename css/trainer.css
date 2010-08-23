@@ -43,9 +43,19 @@
 }
 
 #trainer {
+  min-width: 864px;
   clear: both;
-  width: 900px;
-  margin: 0 auto;
+  float: left;
+  position: relative;
+  left: 50%;
+  margin-top: 0.5em;
+}
+
+#trainer_form {
+  min-width: inherit;
+  float: left;
+  position: relative;
+  left: -50%;
 }
 
 #trainer_metadata .metadata_field {
