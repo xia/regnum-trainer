@@ -15,6 +15,7 @@
     <script type="text/javascript" src="js/jquery.mousewheel.min.js"></script>
     <script type="text/javascript" src="js/jquery.delay.min.js"></script>
     <script type="text/javascript" src="js/jquery.timers-1.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.query-2.1.7.js"></script>
     <script type="text/javascript" src="js/jquery.qtip-1.0.min.js"></script>
     <script type="text/javascript" src="js/trainer.js"></script>
     <script type="text/javascript">
@@ -24,11 +25,19 @@
           $('#trainer').hide();
 
           $('#tool_option_submit').click(function() {
-            $('#trainer').hide();
-            T.load_data($('#game_version').val(), $('#char_class').val(), T.reset_events);
-            return false;
+              $('#trainer').hide();
+              T.load_data($('#game_version').val(), $('#char_class').val(), T.reset_events);
+              return false;
             });
-          });
+
+          if ($.query.get('s')) {
+            T.decode($.query.get('s'), function() {
+                $('#game_version').val(T.setup.get_game_version());
+                $('#char_class').val(T.setup.get_character_class());
+
+              });
+          }
+        });
     </script>
   </head>
   <body>
@@ -50,14 +59,14 @@
             <select id="char_class">
               <option value="">-- Class --</option>
               <option>Archer</option>
-              <option value="Hunter">&raquo; Hunter</option>
-              <option value="Marksman">&raquo; Marksman</option>
+              <option value="hunter">&raquo; Hunter</option>
+              <option value="marksman">&raquo; Marksman</option>
               <option>Mage</option>
-              <option value="Conjurer">&raquo; Conjurer</option>
-              <option value="Warlock">&raquo; Warlock</option>
+              <option value="conjurer">&raquo; Conjurer</option>
+              <option value="warlock">&raquo; Warlock</option>
               <option>Warrior</option>
-              <option value="Barbarian">&raquo; Barbarian</option>
-              <option value="Knight">&raquo; Knight</option>
+              <option value="barbarian">&raquo; Barbarian</option>
+              <option value="knight">&raquo; Knight</option>
             </select>
             </li>
             <li class="tool_option" widget="go">

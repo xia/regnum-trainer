@@ -264,6 +264,14 @@ function Trainer() {
   this.get_character_level = function() {
     return character_level;
   }
+
+  this.get_game_version = function() {
+    return game_version;
+  }
+
+  this.get_character_class = function() {
+    return character_class;
+  }
 }
 
 function TrainerUI() {
@@ -509,6 +517,14 @@ function TrainerUI() {
 
   function spec_level_map(value, index) {
     return $('<span>').addClass('l' + (index + 1)).text(value);
+  }
+
+  this.decode = function(code, callback) {
+    self.setup.decode(code, function() {
+        self.reset_ui();
+        self.reset_events();
+        if ($.isFunction(callback)) { callback.apply(self) }
+        });
   }
 
   this.reset_events = function() {
