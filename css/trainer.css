@@ -188,4 +188,19 @@
   background-image: url('themes/inquisition/images/ui-icons_ffffff_256x240.png');
 }
 
+.tooltip .damage {
+    color: #F2F273;
+}
 
+.tooltip .buffs {
+    color: #4093E6;
+}
+
+.tooltip .debuffs {
+    color: #F19999;
+}
+
+.tooltip .active {
+    color: blue;
+    font-weight: bold;
+}
