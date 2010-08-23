@@ -415,6 +415,13 @@ function TrainerUI() {
         specs.append(spec_block('Area', power.area));
       }
     }
+    if (power.buffs) {
+      specs.append(spec_block('Buffs', power.buffs).addClass('buffs'));
+    }
+    if (power.debuffs) {
+      specs.append(spec_block('Debuffs', power.debuffs).addClass('debuffs'));
+    }
+
     tooltip.append(specs);
 
     return tooltip;
