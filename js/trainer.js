@@ -147,10 +147,10 @@ function Trainer() {
       + encodeChars.charAt(character_level - 1);
 
     $.each(self.config.disciplines, function(index, discipline) {
-      for (var s=1; s<=10; s+=2) {
-        var num = 0;
-        num += discipline.spells[s-1].current_level * 6;
-        num += discipline.spells[s].current_level;
+      code += encodeChars.charAt(discipline.current_level);
+      for (var s = 1; s <= 10; s += 2) {
+        var num = discipline.spells[s - 1].current_level * 6
+                + discipline.spells[s].current_level;
         code += encodeChars.charAt(num);
       }
       });
@@ -159,9 +159,12 @@ function Trainer() {
   }
 
   this.decode = function(text) {
-    var version = known_versions[text[0]],
-        klass = class_types[text[1]];
+    var version = known_versions[encodeChars.indexOf(text[0])],
+        klass = class_types[encodeChars.indexOf(text[1])],
+        level = encodeChars.indexOf(text[2]) + 1;
 
+    self.load_data(version, klass, level, function() {
+        });
     // Load class
     this.gameVersion(l_gameVersions[text[0]]);
     this.characterClass(l_classTypes[text[1]]);
