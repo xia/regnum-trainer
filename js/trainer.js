@@ -142,25 +142,23 @@ function Trainer() {
   }
 
   this.encode = function() {
-    var code = encodeChars.charAt($.inArray(this.game_version, known_versions))
-      + encodeChars.charAt($.inArray(this.character_class, Object.keys(class_type_masks)));
+    var code = encodeChars.charAt($.inArray(game_version, known_versions))
+      + encodeChars.charAt($.inArray(character_class, class_types));
 
     $.each(self.config.disciplines, function(index, discipline) {
-        });
 
-    for (var d=0,l=disc.length; d<l; ++d) {
-      var level = this._values[disc[d]].level;
       for (var s=1; s<=10; s+=2) {
         var num = 0;
-        if (s <= level) {
-          num += this._values[disc[d]].power[s] * 6;
+        if (s <= discipline.current_level) {
+          num += discipline.spells[s-1].current_level * 6;
         }
-        if ((s+1) <= level) {
-          num += (this._values[disc[d]].power[s+1]);
+        if ((s+1) <= discipline.current_level) {
+          num += discipline.spells[s].current_level;
         }
         code += encodeChars.charAt(num);
       }
-    }
+      });
+
     return code;
   }
 
