@@ -32,6 +32,7 @@ function Trainer() {
         'mage':0x20, 'conjurer':0x21, 'warlock':0x22,
         'warrior':0x40, 'barbarian':0x41, 'knight':0x42
       },
+      class_types = [ 'archer', 'hunter', 'marksman', 'mage', 'conjurer', 'warlock', 'warrior', 'barbarian', 'knight' ],
       known_versions = [ '1.6.2', '1.7_beta1' ],
       class_mask = 0xF0,
       game_version = null,
@@ -62,7 +63,7 @@ function Trainer() {
 
   function set_character_class(c) {
     var c = c.toLowerCase();
-    if ($.inArray(c, Object.keys(class_type_masks))) {
+    if ($.inArray(c, class_types)) {
       character_class = c;
     }
   }
