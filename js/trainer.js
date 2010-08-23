@@ -27,6 +27,7 @@ function lookup(obj, key, default_) {
 function Trainer() {
   var self = this,
       encodeChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ",
+      encodeBase = 6,
       max_character_level = 50,
       class_type_masks = {
         'archer':0x10, 'hunter':0x11, 'marksman':0x12,
@@ -158,39 +159,37 @@ function Trainer() {
     return code;
   }
 
-  this.decode = function(text) {
-    var version = known_versions[encodeChars.indexOf(text[0])],
-        klass = class_types[encodeChars.indexOf(text[1])],
-        level = encodeChars.indexOf(text[2]) + 1;
+  this.decode = function(code, callback) {
+    var version = known_versions[encodeChars.indexOf(code[0])],
+        klass = class_types[encodeChars.indexOf(code[1])],
+        level = encodeChars.indexOf(code[2]) + 1;
 
     self.load_data(version, klass, level, function() {
+        var discipline_index = 0;
+        $.each(self.config.disciplines, function(discipline_name, discipline) {
+          self.set_discipline_level(discipline_name, encodeChars.indexOf(code[discipline_index * 6 + 3]));
+
+          $.each(discipline.spells, function(power_index, power) {
+            var offset = (discipline_index * 6) + 4 + Math.floor(power_index / 2),
+            value = encodeChars.indexOf(code[offset]),
+            level = null;
+
+            if (0 == power_index % 2) {
+              level = Math.floor(value / 6);
+            } else {
+              level = value % 6;
+            }
+
+            self.set_power_level(discipline_name, power_index + 1, level);
+          });
+          discipline_index++;
         });
-    // Load class
-    this.gameVersion(l_gameVersions[text[0]]);
-    this.characterClass(l_classTypes[text[1]]);
-    // Set powers and levels
-    var disc = this._getDisciplines();
-    var c = 2;
-    for (var d=0,l=disc.length; d<l; ++d) {
-      var level = 0;
-      var spells = [];
-      var s;
-      for (s=1; s<=10; s+=2,++c) {
-        var num = encodeChars.indexOf(text[c]);
-        spells[s] = Math.floor(num / 6);
-        spells[s+1] = num % 6;
-        if (spells[s]>0) {
-          level = s;
+        reset_points();
+        if ($.isFunction(callback)) {
+        callback.apply(self);
         }
-        if (spells[s+1]>0) {
-          level = s+1;
-        }
-      }
-      this.spellLevel(disc[d],level);
-      for (s=1; s<=10; ++s) {
-        this.spellPowerLevel(disc[d],s,spells[s]);
-      }
-    }
+
+        });
   }
 
   function reset_limits() {
