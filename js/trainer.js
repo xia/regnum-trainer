@@ -538,7 +538,10 @@ function TrainerUI() {
               title: { text: $(power).attr('title') },
               text: $(power).next('.tooltip') 
             },
-            position: { adjust: { screen: true } },
+            position: {
+              corner: { target: 'bottomMiddle', tooltip: 'topMiddle'},
+              adjust: { screen: true }
+            },
             style: {
               name: 'dark',
             }
