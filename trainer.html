@@ -27,6 +27,10 @@
             $('#trainer').hide();
             T.load_data($('#game_version').val(), $('#char_class').val(),
               function() {
+                $('.discipline .metadata .increase_level').click(T.increase_discipline_level);
+                $('.discipline .metadata .decrease_level').click(T.decrease_discipline_level);
+                $('.discipline .powers .increase_level').click(T.increase_power_level);
+                $('.discipline .powers .decrease_level').click(T.decrease_power_level);
                 $('#trainer').fadeIn();
               }
               );

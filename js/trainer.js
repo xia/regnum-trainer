@@ -352,6 +352,39 @@ function TrainerUI() {
     });
   }
 
+  this.notify_error = function(message) {
+    alert(message);
+  }
+
+  this.increase_discipline_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Discipline is at maximum level');
+    } else {
+      var discipline = $(this).parents('.metadata'),
+          discipline_name = discipline.find('.name').text(),
+          discipline_level = parseInt(discipline.find('.level').text());
+      self.set_discipline_level(discipline_name, discipline_level + 2);
+    }
+  }
+
+  this.decrease_discipline_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Discipline is at minimum level');
+    } else {
+      var discipline = $(this).parents('.metadata'),
+          discipline_name = discipline.find('.name').text(),
+          discipline_level = parseInt(discipline.find('.level').text());
+      self.set_discipline_level(discipline_name, discipline_level - 2);
+    }
+  }
+
+  this.increase_power_level = function(source) {
+  }
+
+  this.decrease_power_level = function(source) {
+    alert('dec!');
+  }
+
   this.reset_ui = function() {
     var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
@@ -364,8 +397,8 @@ function TrainerUI() {
             .append($('<div>').addClass('level')),
           control_block = $('<div>').addClass('ui-icon'),
           controls_block = $('<div>').addClass('controls')
-            .append(control_block.clone().addClass('ui-icon-triangle-1-n'))
-            .append(control_block.clone().addClass('ui-icon-triangle-1-s')),
+            .append(control_block.clone().addClass('increase_level ui-icon-triangle-1-n'))
+            .append(control_block.clone().addClass('decrease_level ui-icon-triangle-1-s')),
           powers_block = $('<div>').addClass('powers'),
           discipline_block = $('<div>').addClass('discipline discipline_' + dword);
 
