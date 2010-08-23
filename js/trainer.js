@@ -510,5 +510,26 @@ function TrainerUI() {
   function spec_level_map(value, index) {
     return $('<span>').addClass('l' + (index + 1)).text(value);
   }
+
+  this.reset_events = function() {
+    $('.discipline .metadata .increase_level').click(T.increase_discipline_level);
+    $('.discipline .metadata .decrease_level').click(T.decrease_discipline_level);
+    $('.discipline .powers .increase_level').click(T.increase_power_level);
+    $('.discipline .powers .decrease_level').click(T.decrease_power_level);
+    $('.power').each(function(index, power) {
+        $(power).qtip({
+            content: {
+              title: { text: $(power).attr('title') },
+              text: $(power).next('.tooltip') 
+            },
+            position: { adjust: { screen: true } },
+            style: {
+              name: 'dark',
+            }
+          });
+      });
+    $('.powers .tooltip').hide();
+    $('#trainer').fadeIn();
+  }
 }
 
