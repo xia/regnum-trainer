@@ -59,8 +59,7 @@
 }
 
 #trainer_actions {
-  float: right;
-  margin-right: 18px;
+  text-align: right;
 }
 
 #trainer_actions a {

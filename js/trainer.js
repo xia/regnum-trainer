@@ -527,6 +527,19 @@ function TrainerUI() {
         });
   }
 
+  this.permalink = function() {
+    return window.location.protocol + '//'
+      + window.location.host + window.location.pathname
+      + '?s=' + self.setup.encode()
+  }
+
+  this.show_permalink = function() {
+    $('<div>').append($('<span>').text('Bookmark this setup as:'))
+      .append($('<a>').attr('href', self.permalink()).text(self.permalink()))
+      .dialog();
+    return false;
+  }
+
   this.reset_events = function() {
     $('.discipline .metadata .increase_level').click(T.increase_discipline_level);
     $('.discipline .metadata .decrease_level').click(T.decrease_discipline_level);
