@@ -301,6 +301,8 @@ function TrainerUI() {
   this.reset_controls = function() {
     var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
+    this.update_permalink();
+
     metadata.find('.discipline_points .used').text(setup.config.discipline_points_used);
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
     metadata.find('.power_points .used').text(setup.config.power_points_used);
@@ -533,11 +535,8 @@ function TrainerUI() {
       + '?s=' + self.setup.encode()
   }
 
-  this.show_permalink = function() {
-    $('<div>').append($('<span>').text('Bookmark this setup as:'))
-      .append($('<a>').attr('href', self.permalink()).text(self.permalink()))
-      .dialog();
-    return false;
+  this.update_permalink = function() {
+    return $('#permalink').attr('href', self.permalink());
   }
 
   this.reset_events = function() {
