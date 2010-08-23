@@ -412,7 +412,7 @@ function TrainerUI() {
         $.each(discipline.spells, function(power_index, power) {
           var pword = power.name.replace(/ /g, '_'),
               pid = dword + ':' + pword,
-              block = $('<div>').addClass('power p' + (power_index+1));
+              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name);
 
           block.append(icon_block.clone());
           block.append(controls_block.clone());
