@@ -78,7 +78,6 @@ function Trainer() {
   }
 
   function set_config(data, level) {
-    console.log(data);
     var class_code = lookup(class_type_masks, character_class, 0),
         c = {
           'discipline_points_per_level':
