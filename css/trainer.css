@@ -96,9 +96,9 @@
 }
 
 #trainer_ui .power.available {
-  border-top: 1px #ffffff solid;
-  border-bottom: 1px #ffffff solid;
-  background-color: #ffffff;
+  border-top: 1px #fff solid;
+  border-bottom: 1px #fff solid;
+  background-color: #ccc;
 }
 
 #trainer_ui .power.valid:hover,
