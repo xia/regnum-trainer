@@ -147,15 +147,10 @@ function Trainer() {
       + encodeChars.charAt(character_level - 1);
 
     $.each(self.config.disciplines, function(index, discipline) {
-
       for (var s=1; s<=10; s+=2) {
         var num = 0;
-        if (s <= discipline.current_level) {
-          num += discipline.spells[s-1].current_level * 6;
-        }
-        if ((s+1) <= discipline.current_level) {
-          num += discipline.spells[s].current_level;
-        }
+        num += discipline.spells[s-1].current_level * 6;
+        num += discipline.spells[s].current_level;
         code += encodeChars.charAt(num);
       }
       });
