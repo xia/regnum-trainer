@@ -373,18 +373,80 @@ function TrainerUI() {
           .append(controls_block.clone())
           );
 
-        for (p = 1; p <= 10; p++) {
-          block = $('<div>').addClass('power p' + p);
+        $.each(discipline.spells, function(power_index, power) {
+          var pword = power.name.replace(/ /g, '_'),
+              pid = dword + ':' + pword,
+              block = $('<div>').addClass('power p' + (power_index+1));
+
           block.append(icon_block.clone());
           block.append(controls_block.clone());
           powers_block.append(block);
-        }
+          powers_block.append(tooltip_block(power).attr('id', pid));
+        });
 
         discipline_block.append(powers_block);
         ui.append(discipline_block);
       });
 
     self.reset_controls();
+  }
+
+  function tooltip_block(power) {
+    var tooltip = $('<div>').addClass('tooltip');
+    tooltip.append($('<div>').addClass('description').text(power.description));
+    if (power.damage) {
+      tooltip.append(spec_block('Damage', power.damage).addClass('damage'));
+    }
+
+    specs = $('<div>').addClass('specs');
+    specs.append(spec_block('Type', power.type || 'Unknown'));
+    if (power.type && power.type != 'Passive') {
+      if (power.duration) {
+        specs.append(spec_block('Duration', power.duration));
+      }
+      specs.append(spec_block('Cost', power.mana));
+      specs.append(spec_block('Casting', power.cast || 'Instant'));
+      specs.append(spec_block('Cooldown', power.cooldown || 'Unknown'));
+      specs.append(spec_block('GCD', power.gcd || 'Unknown'));
+      if (power.range) {
+        specs.append(spec_block('Range', power.range || 'Weapon Range'));
+      }
+      if (power.area) {
+        specs.append(spec_block('Area', power.area));
+      }
+    }
+    tooltip.append(specs);
+
+    return tooltip;
+  }
+
+  function spec_block(name, v) {
+    var value = $('<div>');
+
+    if (typeof v == 'string' || typeof v == 'number') {
+      value.append(v);
+    } else if ($.isArray(v)) {
+      $.each($.map(v, spec_level_map), function(i, block) {
+          if (i > 0) { value.append(', '); }
+          value.append(block)
+          });
+    } else {
+      for (var spec in v) {
+        if (v[spec] === true) {
+          value.append(spec);
+        } else {
+          value.append(spec_block(spec, v[spec]));
+        }
+      }
+    }
+
+    return $('<div>')
+      .append($('<label>').text(name + ':'))
+      .append(value);
+  }
+
+  function spec_level_map(value, index) {
+    return $('<span>').addClass('l' + (index + 1)).text(value);
   }
 }
 
