@@ -58,6 +58,15 @@
   left: -50%;
 }
 
+#trainer_actions {
+  float: right;
+  margin-right: 18px;
+}
+
+#trainer_actions a {
+  font-size: smaller;
+}
+
 #trainer_metadata .metadata_field {
   margin-right: 2em;
   margin-left: 0.5em;

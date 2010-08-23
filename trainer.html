@@ -23,6 +23,7 @@
 
       $(function() {
           $('#trainer').hide();
+          $('#permalink').button();
 
           $('#tool_option_submit').click(function() {
               $('#trainer').hide();
@@ -76,27 +77,26 @@
         </form>
       </div>
       <div id="trainer" class="ui-helper-clearfix">
-        <div id="trainer_metadata">
-          <span class="metadata_field character_level">
-            <label>Character Level:</label>
-            <span class="level">50</span>
-          </span>
-          <span class="metadata_field discipline_points">
-            <label>Discipline Points:</label>
-            <span class="used">99</span>/<span class="total">99</span>
-          </span>
-          <span class="metadata_field power_points">
-            <label>Power Points:</label>
-            <span class="used">99</span>/<span class="total">99</span>
-          </span>
-        </div>
         <div id="trainer_form">
           <form method="post">
-            <div id="trainer_ui">
-            </div>
             <div id="trainer_actions">
-              <a href="#" id="reset_powers">Reset Powers</a>
-              <a href="#" id="permalink">Save</a>
+              <a href="#" id="permalink">Get Permalink</a>
+            </div>
+            <div id="trainer_metadata">
+              <span class="metadata_field character_level">
+                <label>Character Level:</label>
+                <span class="level">50</span>
+              </span>
+              <span class="metadata_field discipline_points">
+                <label>Discipline Points:</label>
+                <span class="used">99</span>/<span class="total">99</span>
+              </span>
+              <span class="metadata_field power_points">
+                <label>Power Points:</label>
+                <span class="used">99</span>/<span class="total">99</span>
+              </span>
+            </div>
+            <div id="trainer_ui" class="ui-helper-clearfix">
             </div>
           </form>
         </div>
