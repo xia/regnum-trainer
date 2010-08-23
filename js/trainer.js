@@ -26,6 +26,7 @@ function lookup(obj, key, default_) {
 
 function Trainer() {
   var self = this,
+      encodeChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJ",
       max_character_level = 50,
       class_type_masks = {
         'archer':0x10, 'hunter':0x11, 'marksman':0x12,
@@ -141,6 +142,57 @@ function Trainer() {
     self.config.power_points_used = pp_total;
   }
 
+  this.encode = function() {
+    var code = encodeChars.charAt($.inArray(this.game_version, known_versions))
+      + encodeChars.charAt($.inArray(this.character_class, Object.keys(class_type_masks)));
+
+    $.each(self.config.disciplines, function(index, discipline) {
+        });
+
+    for (var d=0,l=disc.length; d<l; ++d) {
+      var level = this._values[disc[d]].level;
+      for (var s=1; s<=10; s+=2) {
+        var num = 0;
+        if (s <= level) {
+          num += this._values[disc[d]].power[s] * 6;
+        }
+        if ((s+1) <= level) {
+          num += (this._values[disc[d]].power[s+1]);
+        }
+        code += encodeChars.charAt(num);
+      }
+    }
+    return code;
+  }
+
+    this.decode = function(text) {
+        // Load class
+        this.gameVersion(l_gameVersions[text[0]]);
+        this.characterClass(l_classTypes[text[1]]);
+        // Set powers and levels
+        var disc = this._getDisciplines();
+        var c = 2;
+        for (var d=0,l=disc.length; d<l; ++d) {
+            var level = 0;
+            var spells = [];
+            var s;
+            for (s=1; s<=10; s+=2,++c) {
+                var num = encodeChars.indexOf(text[c]);
+                spells[s] = Math.floor(num / 6);
+                spells[s+1] = num % 6;
+                if (spells[s]>0) {
+                    level = s;
+                }
+                if (spells[s+1]>0) {
+                    level = s+1;
+                }
+            }
+            this.spellLevel(disc[d],level);
+            for (s=1; s<=10; ++s) {
+                this.spellPowerLevel(disc[d],s,spells[s]);
+            }
+        }
+    }
   function reset_limits() {
     var c = self.config;
     c.discipline_points_total = c.discipline_points_per_level[character_level-1];
