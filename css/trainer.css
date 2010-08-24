@@ -43,19 +43,9 @@
 }
 
 #trainer {
-  min-width: 864px;
+  width: 864px;
   clear: both;
-  float: left;
-  position: relative;
-  left: 50%;
-  margin-top: 0.5em;
-}
-
-#trainer_form {
-  min-width: inherit;
-  float: left;
-  position: relative;
-  left: -50%;
+  margin: 0 auto;
 }
 
 #trainer_actions {
@@ -203,6 +193,10 @@
   background-image: url('themes/inquisition/images/ui-icons_cd0a0a_256x240.png');
 }
 
+.tooltip .description {
+  color: #CCCCCC;
+}
+
 .tooltip .damage {
   color: #F2F273;
 }
@@ -223,4 +217,9 @@
 .tooltip .spec_label {
   float: left;
   margin-right: 0.5em;
+}
+
+#cluetip-outer {
+  font-size: small;
+  line-height: 1.4em;
 }
