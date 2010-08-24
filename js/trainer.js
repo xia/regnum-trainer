@@ -461,7 +461,7 @@ function TrainerUI() {
 
         $(element).find('.level').text(discipline.current_level);
 
-        $(element).find('.metadata .ui-icon').removeClass('disabled');
+        $(element).find('.metadata .ui-icon.disabled').removeClass('disabled');
         if (setup.config.min_discipline_level == discipline.current_level) {
           $(element).find('.metadata .ui-icon-triangle-1-s').addClass('disabled');
         } 
@@ -493,7 +493,7 @@ function TrainerUI() {
           }
 
           /* redraw controls */
-          $(element).find('.ui-icon').removeClass('disabled');
+          $(element).find('.ui-icon.disabled').removeClass('disabled');
           if (setup.config.min_power_level == power.current_level) {
             $(element).find('.ui-icon-triangle-1-s').addClass('disabled');
           }
