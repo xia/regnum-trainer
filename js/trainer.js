@@ -338,18 +338,20 @@ function TrainerUI() {
   }
 
   this.increase_power_level = function(source) {
+    var discipline_node = $(this).parents('.discipline'),
+        discipline_name = discipline_node.find('.name').text(),
+        discipline = self.setup.config.disciplines[discipline_name],
+        power = $(this).parents('.power'),
+        power_index = discipline_node.find('.power').index(power) + 1,
+        power_level = parseInt(power.find('.level').text());
+
     if ($(this).hasClass('disabled')) {
-      if (0 == self.setup.power_points_left()) {
-        self.notify_error('Not enough power points');
-      } else {
+      if (power_level == discipline.current_power_limit) {
         self.notify_error('Power is at maximum level');
+      } else {
+        self.notify_error('Not enough power points');
       }
     } else {
-      var discipline = $(this).parents('.discipline'),
-          discipline_name = discipline.find('.name').text();
-          power = $(this).parents('.power'),
-          power_index = discipline.find('.power').index(power) + 1,
-          power_level = parseInt(power.find('.level').text());
       self.set_power_level(discipline_name, power_index, power_level + 1);
     }
   }
