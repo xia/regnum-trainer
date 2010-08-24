@@ -519,7 +519,9 @@ function TrainerUI() {
       specs.append(spec_block('Cost', power.mana));
       specs.append(spec_block('Casting', power.cast || 'Instant'));
       specs.append(spec_block('Cooldown', power.cooldown || 'Unknown'));
-      specs.append(spec_block('GCD', power.gcd || 'Unknown'));
+      if (power.gcd) {
+        specs.append(spec_block('GCD', power.gcd || 'Unknown'));
+      }
       if (power.range) {
         specs.append(spec_block('Range', power.range || 'Weapon Range'));
       }
