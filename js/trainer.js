@@ -311,12 +311,17 @@ function TrainerUI() {
   }
 
   this.increase_discipline_level = function(source) {
+    var discipline = $(this).parents('.metadata'),
+        discipline_name = discipline.find('.name').text(),
+        discipline_level = parseInt(discipline.find('.level').text());
+
     if ($(this).hasClass('disabled')) {
-      self.notify_error('Discipline is at maximum level');
+      if (discipline_level == self.setup.config.max_discipline_level) {
+        self.notify_error('Discipline is at maximum level');
+      } else {
+        self.notify_error('Not enough discipline points');
+      }
     } else {
-      var discipline = $(this).parents('.metadata'),
-          discipline_name = discipline.find('.name').text(),
-          discipline_level = parseInt(discipline.find('.level').text());
       self.set_discipline_level(discipline_name, discipline_level + 2);
     }
   }
@@ -459,14 +464,12 @@ function TrainerUI() {
 
         $(element).find('.level').text(discipline.current_level);
 
+        $(element).find('.metadata .ui-icon').removeClass('disabled');
         if (setup.config.min_discipline_level == discipline.current_level) {
-          $(element).find('.metadata .ui-icon-triangle-1-n').removeClass('disabled');
           $(element).find('.metadata .ui-icon-triangle-1-s').addClass('disabled');
-        } else if (setup.config.max_discipline_level == discipline.current_level) {
+        } else if (setup.config.max_discipline_level == discipline.current_level
+          || !setup.valid_discipline_level(discipline, discipline.current_level + 2)) {
           $(element).find('.metadata .ui-icon-triangle-1-n').addClass('disabled');
-          $(element).find('.metadata .ui-icon-triangle-1-s').removeClass('disabled');
-        } else {
-          $(element).find('.metadata .ui-icon').removeClass('disabled');
         }
 
         $(element).find('.power').each(function(power_index, element) {
