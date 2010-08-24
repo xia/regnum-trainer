@@ -390,21 +390,8 @@ function TrainerUI() {
     $('.discipline .powers .increase_level').click(T.increase_power_level);
     $('.discipline .powers .decrease_level').click(T.decrease_power_level);
     $('.power').each(function(index, power) {
-        $(power).qtip({
-            content: {
-              title: { text: $(power).attr('title') },
-              text: $(power).next('.tooltip') 
-            },
-            position: {
-              corner: { target: 'bottomMiddle', tooltip: 'topMiddle'},
-              adjust: { screen: true }
-            },
-            style: {
-              name: 'dark',
-            }
-          });
+        $(power).cluetip({ local: true });
       });
-    $('.powers .tooltip').hide();
     $('#trainer').fadeIn();
   }
 
@@ -438,8 +425,8 @@ function TrainerUI() {
 
         $.each(discipline.spells, function(power_index, power) {
           var pword = power.name.replace(/ /g, '_'),
-              pid = dword + ':' + pword,
-              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name);
+              pid = dword + '-' + pword.replace(/'/g, '_'),
+              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name).attr('rel', '#' + pid);
 
           block.append(icon_block.clone());
           block.append(controls_block.clone());
