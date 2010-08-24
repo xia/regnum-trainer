@@ -279,6 +279,23 @@ function TrainerUI() {
 
   this.setup = new Trainer();
 
+  this.load_data = function(game_version, character_class, callback) {
+    this.setup.load_data(game_version, character_class, function() {
+      reset_ui();
+      if ($.isFunction(callback)) {
+        callback.apply(self);
+      }
+    });
+  }
+
+  this.decode = function(code, callback) {
+    self.setup.decode(code, function() {
+        reset_ui();
+        self.reset_events();
+        if ($.isFunction(callback)) { callback.apply(self) }
+        });
+  }
+
   this.set_discipline_level = function(discipline_name, level) {
     self.setup.set_discipline_level(discipline_name, level);
     reset_controls();
@@ -289,13 +306,132 @@ function TrainerUI() {
     reset_controls();
   }
 
-  this.load_data = function(game_version, character_class, callback) {
-    this.setup.load_data(game_version, character_class, function() {
-      reset_ui();
-      if ($.isFunction(callback)) {
-        callback.apply(self);
-      }
-    });
+  this.increase_discipline_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Discipline is at maximum level');
+    } else {
+      var discipline = $(this).parents('.metadata'),
+          discipline_name = discipline.find('.name').text(),
+          discipline_level = parseInt(discipline.find('.level').text());
+      self.set_discipline_level(discipline_name, discipline_level + 2);
+    }
+  }
+
+  this.decrease_discipline_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Discipline is at minimum level');
+    } else {
+      var discipline = $(this).parents('.metadata'),
+          discipline_name = discipline.find('.name').text(),
+          discipline_level = parseInt(discipline.find('.level').text());
+      self.set_discipline_level(discipline_name, discipline_level - 2);
+    }
+  }
+
+  this.increase_power_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Power is at maximum level');
+    } else {
+      var discipline = $(this).parents('.discipline'),
+          discipline_name = discipline.find('.name').text();
+          power = $(this).parents('.power'),
+          power_index = discipline.find('.power').index(power) + 1,
+          power_level = parseInt(power.find('.level').text());
+      self.set_power_level(discipline_name, power_index, power_level + 1);
+    }
+  }
+
+  this.decrease_power_level = function(source) {
+    if ($(this).hasClass('disabled')) {
+      self.notify_error('Power is at minimum level');
+    } else {
+      var discipline = $(this).parents('.discipline'),
+          discipline_name = discipline.find('.name').text();
+          power = $(this).parents('.power'),
+          power_index = discipline.find('.power').index(power) + 1,
+          power_level = parseInt(power.find('.level').text());
+      self.set_power_level(discipline_name, power_index, power_level - 1);
+    }
+  }
+
+  this.permalink = function() {
+    return window.location.protocol + '//'
+      + window.location.host + window.location.pathname
+      + '?s=' + self.setup.encode()
+  }
+
+  this.update_permalink = function() {
+    return $('#permalink').attr('href', self.permalink());
+  }
+
+  this.reset_events = function() {
+    $('.discipline .metadata .increase_level').click(T.increase_discipline_level);
+    $('.discipline .metadata .decrease_level').click(T.decrease_discipline_level);
+    $('.discipline .powers .increase_level').click(T.increase_power_level);
+    $('.discipline .powers .decrease_level').click(T.decrease_power_level);
+    $('.power').each(function(index, power) {
+        $(power).qtip({
+            content: {
+              title: { text: $(power).attr('title') },
+              text: $(power).next('.tooltip') 
+            },
+            position: {
+              corner: { target: 'bottomMiddle', tooltip: 'topMiddle'},
+              adjust: { screen: true }
+            },
+            style: {
+              name: 'dark',
+            }
+          });
+      });
+    $('.powers .tooltip').hide();
+    $('#trainer').fadeIn();
+  }
+
+  this.notify_error = function(message) {
+    alert(message);
+  }
+
+  function reset_ui() {
+    var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+
+    ui.empty();
+    $.each(setup.config.disciplines, function(discipline_name, discipline) {
+        var dword = discipline_name.replace(/ /g, '_'),
+          name_block = $('<div>').addClass('name'),
+          icon_block = $('<div>').addClass('icon')
+            .css('background-image', "url('" + discipline.icon_path + "')")
+            .append($('<div>').addClass('level')),
+          control_block = $('<div>').addClass('ui-icon'),
+          controls_block = $('<div>').addClass('controls')
+            .append(control_block.clone().addClass('increase_level ui-icon-triangle-1-n'))
+            .append(control_block.clone().addClass('decrease_level ui-icon-triangle-1-s')),
+          powers_block = $('<div>').addClass('powers'),
+          discipline_block = $('<div>').addClass('discipline discipline_' + dword);
+
+
+        discipline_block.append($('<div>').addClass('metadata')
+          .append(name_block.text(discipline_name))
+          .append(icon_block.clone())
+          .append(controls_block.clone())
+          );
+
+        $.each(discipline.spells, function(power_index, power) {
+          var pword = power.name.replace(/ /g, '_'),
+              pid = dword + ':' + pword,
+              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name);
+
+          block.append(icon_block.clone());
+          block.append(controls_block.clone());
+          powers_block.append(block);
+          powers_block.append(tooltip_block(power).attr('id', pid));
+        });
+
+        discipline_block.append(powers_block);
+        ui.append(discipline_block);
+      });
+
+    reset_controls();
   }
 
   function reset_controls() {
@@ -357,100 +493,6 @@ function TrainerUI() {
           }
         });
     });
-  }
-
-  this.notify_error = function(message) {
-    alert(message);
-  }
-
-  this.increase_discipline_level = function(source) {
-    if ($(this).hasClass('disabled')) {
-      self.notify_error('Discipline is at maximum level');
-    } else {
-      var discipline = $(this).parents('.metadata'),
-          discipline_name = discipline.find('.name').text(),
-          discipline_level = parseInt(discipline.find('.level').text());
-      self.set_discipline_level(discipline_name, discipline_level + 2);
-    }
-  }
-
-  this.decrease_discipline_level = function(source) {
-    if ($(this).hasClass('disabled')) {
-      self.notify_error('Discipline is at minimum level');
-    } else {
-      var discipline = $(this).parents('.metadata'),
-          discipline_name = discipline.find('.name').text(),
-          discipline_level = parseInt(discipline.find('.level').text());
-      self.set_discipline_level(discipline_name, discipline_level - 2);
-    }
-  }
-
-  this.increase_power_level = function(source) {
-    if ($(this).hasClass('disabled')) {
-      self.notify_error('Power is at maximum level');
-    } else {
-      var discipline = $(this).parents('.discipline'),
-          discipline_name = discipline.find('.name').text();
-          power = $(this).parents('.power'),
-          power_index = discipline.find('.power').index(power) + 1,
-          power_level = parseInt(power.find('.level').text());
-      self.set_power_level(discipline_name, power_index, power_level + 1);
-    }
-  }
-
-  this.decrease_power_level = function(source) {
-    if ($(this).hasClass('disabled')) {
-      self.notify_error('Power is at minimum level');
-    } else {
-      var discipline = $(this).parents('.discipline'),
-          discipline_name = discipline.find('.name').text();
-          power = $(this).parents('.power'),
-          power_index = discipline.find('.power').index(power) + 1,
-          power_level = parseInt(power.find('.level').text());
-      self.set_power_level(discipline_name, power_index, power_level - 1);
-    }
-  }
-
-  function reset_ui() {
-    var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
-
-    ui.empty();
-    $.each(setup.config.disciplines, function(discipline_name, discipline) {
-        var dword = discipline_name.replace(/ /g, '_'),
-          name_block = $('<div>').addClass('name'),
-          icon_block = $('<div>').addClass('icon')
-            .css('background-image', "url('" + discipline.icon_path + "')")
-            .append($('<div>').addClass('level')),
-          control_block = $('<div>').addClass('ui-icon'),
-          controls_block = $('<div>').addClass('controls')
-            .append(control_block.clone().addClass('increase_level ui-icon-triangle-1-n'))
-            .append(control_block.clone().addClass('decrease_level ui-icon-triangle-1-s')),
-          powers_block = $('<div>').addClass('powers'),
-          discipline_block = $('<div>').addClass('discipline discipline_' + dword);
-
-
-        discipline_block.append($('<div>').addClass('metadata')
-          .append(name_block.text(discipline_name))
-          .append(icon_block.clone())
-          .append(controls_block.clone())
-          );
-
-        $.each(discipline.spells, function(power_index, power) {
-          var pword = power.name.replace(/ /g, '_'),
-              pid = dword + ':' + pword,
-              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name);
-
-          block.append(icon_block.clone());
-          block.append(controls_block.clone());
-          powers_block.append(block);
-          powers_block.append(tooltip_block(power).attr('id', pid));
-        });
-
-        discipline_block.append(powers_block);
-        ui.append(discipline_block);
-      });
-
-    reset_controls();
   }
 
   function tooltip_block(power) {
@@ -519,48 +561,6 @@ function TrainerUI() {
 
   function spec_level_map(value, index) {
     return $('<span>').addClass('l' + (index + 1)).text(value);
-  }
-
-  this.decode = function(code, callback) {
-    self.setup.decode(code, function() {
-        reset_ui();
-        self.reset_events();
-        if ($.isFunction(callback)) { callback.apply(self) }
-        });
-  }
-
-  this.permalink = function() {
-    return window.location.protocol + '//'
-      + window.location.host + window.location.pathname
-      + '?s=' + self.setup.encode()
-  }
-
-  this.update_permalink = function() {
-    return $('#permalink').attr('href', self.permalink());
-  }
-
-  this.reset_events = function() {
-    $('.discipline .metadata .increase_level').click(T.increase_discipline_level);
-    $('.discipline .metadata .decrease_level').click(T.decrease_discipline_level);
-    $('.discipline .powers .increase_level').click(T.increase_power_level);
-    $('.discipline .powers .decrease_level').click(T.decrease_power_level);
-    $('.power').each(function(index, power) {
-        $(power).qtip({
-            content: {
-              title: { text: $(power).attr('title') },
-              text: $(power).next('.tooltip') 
-            },
-            position: {
-              corner: { target: 'bottomMiddle', tooltip: 'topMiddle'},
-              adjust: { screen: true }
-            },
-            style: {
-              name: 'dark',
-            }
-          });
-      });
-    $('.powers .tooltip').hide();
-    $('#trainer').fadeIn();
   }
 }
 
