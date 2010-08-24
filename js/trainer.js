@@ -281,12 +281,12 @@ function TrainerUI() {
 
   this.set_discipline_level = function(discipline_name, level) {
     self.setup.set_discipline_level(discipline_name, level);
-    self.reset_controls();
+    reset_controls();
   }
 
   this.set_power_level = function(discipline_name, power_index, level) {
     self.setup.set_power_level(discipline_name, power_index, level);
-    self.reset_controls();
+    reset_controls();
   }
 
   this.load_data = function(game_version, character_class, callback) {
@@ -298,10 +298,10 @@ function TrainerUI() {
     });
   }
 
-  this.reset_controls = function() {
+  function reset_controls() {
     var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
-    this.update_permalink();
+    self.update_permalink();
 
     metadata.find('.discipline_points .used').text(setup.config.discipline_points_used);
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
@@ -450,7 +450,7 @@ function TrainerUI() {
         ui.append(discipline_block);
       });
 
-    self.reset_controls();
+    reset_controls();
   }
 
   function tooltip_block(power) {
