@@ -27,8 +27,16 @@
           $('#permalink').button();
 
           $('#tool_option_submit').click(function() {
-              $('#trainer').hide();
-              T.load_data($('#game_version').val(), $('#char_class').val(), T.reset_events);
+              if (!$('#game_version').val()) {
+                $('#game_version').effect('highlight', {}, 2000);
+                T.notify_error('Please select a game version.');
+              } else if (!$('#char_class').val()) {
+                $('#char_class').effect('highlight', {}, 2000);
+                T.notify_error('Please select a character class.');
+              } else {
+                $('#trainer').hide();
+                T.load_data($('#game_version').val(), $('#char_class').val(), T.reset_events);
+              }
               return false;
             });
 
