@@ -155,6 +155,10 @@ function Trainer() {
     return (discipline.current_level > power_index * 2) ? discipline.current_power_limit : self.config.min_power_level;
   }
 
+  this.power_points_left = function() {
+    return self.config.power_points_total - self.config.power_points_used;
+  }
+
   this.set_character_level = function(level) {
     var level = parseInt(level);
     if (!isNaN(level)) { 
@@ -330,7 +334,11 @@ function TrainerUI() {
 
   this.increase_power_level = function(source) {
     if ($(this).hasClass('disabled')) {
-      self.notify_error('Power is at maximum level');
+      if (0 == self.setup.power_points_left()) {
+        self.notify_error('Not enough power points');
+      } else {
+        self.notify_error('Power is at maximum level');
+      }
     } else {
       var discipline = $(this).parents('.discipline'),
           discipline_name = discipline.find('.name').text();
@@ -488,7 +496,7 @@ function TrainerUI() {
           if (setup.config.min_power_level == power.current_level) {
             $(element).find('.ui-icon-triangle-1-s').addClass('disabled');
           }
-          if (power.current_level == power_limit) {
+          if (power.current_level == power_limit || 0 == self.setup.power_points_left()) {
             $(element).find('.ui-icon-triangle-1-n').addClass('disabled');
           }
         });
