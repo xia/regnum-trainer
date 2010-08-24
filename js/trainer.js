@@ -291,7 +291,7 @@ function TrainerUI() {
 
   this.load_data = function(game_version, character_class, callback) {
     this.setup.load_data(game_version, character_class, function() {
-      self.reset_ui();
+      reset_ui();
       if ($.isFunction(callback)) {
         callback.apply(self);
       }
@@ -411,7 +411,7 @@ function TrainerUI() {
     }
   }
 
-  this.reset_ui = function() {
+  function reset_ui() {
     var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
     ui.empty();
@@ -523,7 +523,7 @@ function TrainerUI() {
 
   this.decode = function(code, callback) {
     self.setup.decode(code, function() {
-        self.reset_ui();
+        reset_ui();
         self.reset_events();
         if ($.isFunction(callback)) { callback.apply(self) }
         });
