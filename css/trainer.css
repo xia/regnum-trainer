@@ -1,3 +1,7 @@
+html {
+  overflow-y: scroll;
+}
+
 #trainer_ui .p0 .icon {
   background-position: 0px 0px;
 }
