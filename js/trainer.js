@@ -428,7 +428,7 @@ function TrainerUI() {
 
         $.each(discipline.spells, function(power_index, power) {
           var pword = power.name.replace(/ /g, '_'),
-              pid = dword + '-' + pword.replace(/'/g, '_'),
+              pid = dword + '-' + pword.replace(/[^A-Za-z0-9]/g, '_'),
               block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name).attr('rel', '#' + pid);
 
           block.append(icon_block.clone());
