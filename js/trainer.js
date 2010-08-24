@@ -56,6 +56,127 @@ function Trainer() {
         });
   }
 
+  this.encode = function() {
+    var code = encodeChars.charAt($.inArray(game_version, known_versions))
+      + encodeChars.charAt($.inArray(character_class, class_types))
+      + encodeChars.charAt(character_level - 1);
+
+    $.each(self.config.disciplines, function(index, discipline) {
+      code += encodeChars.charAt(discipline.current_level);
+      for (var s = 1; s <= 10; s += 2) {
+        var num = discipline.spells[s - 1].current_level * 6
+                + discipline.spells[s].current_level;
+        code += encodeChars.charAt(num);
+      }
+      });
+
+    return code;
+  }
+
+  this.decode = function(code, callback) {
+    var version = known_versions[encodeChars.indexOf(code[0])],
+        klass = class_types[encodeChars.indexOf(code[1])],
+        level = encodeChars.indexOf(code[2]) + 1;
+
+    self.load_data(version, klass, level, function() {
+        var discipline_index = 0;
+        $.each(self.config.disciplines, function(discipline_name, discipline) {
+          self.set_discipline_level(discipline_name, encodeChars.indexOf(code[discipline_index * 6 + 3]));
+
+          $.each(discipline.spells, function(power_index, power) {
+            var offset = (discipline_index * 6) + 4 + Math.floor(power_index / 2),
+            value = encodeChars.indexOf(code[offset]),
+            level = null;
+
+            if (0 == power_index % 2) {
+              level = Math.floor(value / 6);
+            } else {
+              level = value % 6;
+            }
+
+            self.set_power_level(discipline_name, power_index + 1, level);
+          });
+          discipline_index++;
+        });
+        reset_points();
+        if ($.isFunction(callback)) {
+        callback.apply(self);
+        }
+
+        });
+  }
+
+  this.reset_powers = function() {
+    $.each(self.config.disciplines, function(index, discipline) {
+        this.set_discipline_level(discipline.name, self.config.min_discipline_level);
+        $.each(discipline.spells, function(index, power) {
+          this.set_power_level(discipline.name, index + 1, self.config.min_power_level);
+          });
+        });
+    reset_points();
+  }
+
+  this.set_discipline_level = function(discipline_name, level) {
+    var discipline = self.config.disciplines[discipline_name];
+    if (discipline) {
+      discipline.current_level = Math.min(level, self.config.max_discipline_level);
+      discipline.current_power_limit =
+        self.config.max_power_level[discipline.current_level-1];
+      reset_points();
+    }
+  }
+
+  this.set_power_level = function(discipline_name, power_index, level) {
+    var discipline = self.config.disciplines[discipline_name];
+    if (discipline) {
+      power = discipline.spells[power_index-1];
+      power.current_level = Math.min(level, discipline.current_power_limit);
+      reset_points();
+    }
+  }
+
+  this.valid_discipline_level = function(discipline, level) {
+    return character_level >= self.config.discipline_required_character_level[level-1]
+      && self.discipline_point_cost(discipline, level) <= self.discipline_points_left()
+      && self.config.min_discipline_level <= level
+      && level <= self.config.max_discipline_level;
+  }
+
+  this.discipline_point_cost = function(discipline, level) {
+    return self.config.discipline_required_points[level-1]
+      - self.config.discipline_required_points[discipline.current_level-1];
+  }
+
+  this.discipline_points_left = function() {
+    return self.config.discipline_points_total - self.config.discipline_points_used;
+  }
+
+  this.power_limit = function(discipline, power_index) {
+    return (discipline.current_level > power_index * 2) ? discipline.current_power_limit : self.config.min_power_level;
+  }
+
+  this.set_character_level = function(level) {
+    var level = parseInt(level);
+    if (!isNaN(level)) { 
+      character_level = Math.min(level, max_character_level);
+    } else {
+      character_level = max_character_level;
+    }
+    reset_limits();
+  }
+
+  this.get_character_level = function() {
+    return character_level;
+  }
+
+  this.get_game_version = function() {
+    return game_version;
+  }
+
+  this.get_character_class = function() {
+    return character_class;
+  }
+
   function set_version(v) {
     if ($.inArray(v, known_versions) > -1) {
       game_version = v;
@@ -116,17 +237,6 @@ function Trainer() {
     self.set_character_level(level);
   }
 
-  function get_disciplines(class_code, data) {
-    var base = class_code & class_mask,
-        disc = lookup(data.class_disciplines, base, []);
-
-    if (base != class_code) {
-      disc = disc.concat(lookup(data.class_disciplines, class_code, []));
-    }
-
-    return disc;
-  }
-
   function reset_points() {
     var disciplines = self.config.disciplines, dp_total = 0, pp_total = 0;
 
@@ -142,56 +252,6 @@ function Trainer() {
     self.config.power_points_used = pp_total;
   }
 
-  this.encode = function() {
-    var code = encodeChars.charAt($.inArray(game_version, known_versions))
-      + encodeChars.charAt($.inArray(character_class, class_types))
-      + encodeChars.charAt(character_level - 1);
-
-    $.each(self.config.disciplines, function(index, discipline) {
-      code += encodeChars.charAt(discipline.current_level);
-      for (var s = 1; s <= 10; s += 2) {
-        var num = discipline.spells[s - 1].current_level * 6
-                + discipline.spells[s].current_level;
-        code += encodeChars.charAt(num);
-      }
-      });
-
-    return code;
-  }
-
-  this.decode = function(code, callback) {
-    var version = known_versions[encodeChars.indexOf(code[0])],
-        klass = class_types[encodeChars.indexOf(code[1])],
-        level = encodeChars.indexOf(code[2]) + 1;
-
-    self.load_data(version, klass, level, function() {
-        var discipline_index = 0;
-        $.each(self.config.disciplines, function(discipline_name, discipline) {
-          self.set_discipline_level(discipline_name, encodeChars.indexOf(code[discipline_index * 6 + 3]));
-
-          $.each(discipline.spells, function(power_index, power) {
-            var offset = (discipline_index * 6) + 4 + Math.floor(power_index / 2),
-            value = encodeChars.indexOf(code[offset]),
-            level = null;
-
-            if (0 == power_index % 2) {
-              level = Math.floor(value / 6);
-            } else {
-              level = value % 6;
-            }
-
-            self.set_power_level(discipline_name, power_index + 1, level);
-          });
-          discipline_index++;
-        });
-        reset_points();
-        if ($.isFunction(callback)) {
-        callback.apply(self);
-        }
-
-        });
-  }
-
   function reset_limits() {
     var c = self.config;
     c.discipline_points_total = c.discipline_points_per_level[character_level-1];
@@ -202,75 +262,15 @@ function Trainer() {
     }
   }
 
-  this.power_limit = function(discipline, power_index) {
-    return (discipline.current_level > power_index * 2) ? discipline.current_power_limit : self.config.min_power_level;
-  }
+  function get_disciplines(class_code, data) {
+    var base = class_code & class_mask,
+        disc = lookup(data.class_disciplines, base, []);
 
-  this.reset_powers = function() {
-    $.each(self.config.disciplines, function(index, discipline) {
-        this.set_discipline_level(discipline.name, self.config.min_discipline_level);
-        $.each(discipline.spells, function(index, power) {
-          this.set_power_level(discipline.name, index + 1, self.config.min_power_level);
-          });
-        });
-    reset_points();
-  }
-
-  this.set_discipline_level = function(discipline_name, level) {
-    var discipline = self.config.disciplines[discipline_name];
-    if (discipline) {
-      discipline.current_level = Math.min(level, self.config.max_discipline_level);
-      discipline.current_power_limit =
-        self.config.max_power_level[discipline.current_level-1];
-      reset_points();
+    if (base != class_code) {
+      disc = disc.concat(lookup(data.class_disciplines, class_code, []));
     }
-  }
 
-  this.set_power_level = function(discipline_name, power_index, level) {
-    var discipline = self.config.disciplines[discipline_name];
-    if (discipline) {
-      power = discipline.spells[power_index-1];
-      power.current_level = Math.min(level, discipline.current_power_limit);
-      reset_points();
-    }
-  }
-
-  this.valid_discipline_level = function(discipline, level) {
-    return character_level >= self.config.discipline_required_character_level[level-1]
-      && self.discipline_point_cost(discipline, level) <= self.discipline_points_left()
-      && self.config.min_discipline_level <= level
-      && level <= self.config.max_discipline_level;
-  }
-
-  this.discipline_point_cost = function(discipline, level) {
-    return self.config.discipline_required_points[level-1]
-      - self.config.discipline_required_points[discipline.current_level-1];
-  }
-
-  this.discipline_points_left = function() {
-    return self.config.discipline_points_total - self.config.discipline_points_used;
-  }
-
-  this.set_character_level = function(level) {
-    var level = parseInt(level);
-    if (!isNaN(level)) { 
-      character_level = Math.min(level, max_character_level);
-    } else {
-      character_level = max_character_level;
-    }
-    reset_limits();
-  }
-
-  this.get_character_level = function() {
-    return character_level;
-  }
-
-  this.get_game_version = function() {
-    return game_version;
-  }
-
-  this.get_character_class = function() {
-    return character_class;
+    return disc;
   }
 }
 
