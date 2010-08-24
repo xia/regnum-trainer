@@ -390,8 +390,11 @@ function TrainerUI() {
     $('.discipline .powers .increase_level').click(T.increase_power_level);
     $('.discipline .powers .decrease_level').click(T.decrease_power_level);
     $('.power').each(function(index, power) {
-        $(power).cluetip({ local: true });
+        $(power).cluetip({ local: true, positionBy: 'bottomTop' });
       });
+    $('#cluetip-outer').addClass('ui-widget');
+    $('#cluetip-title').addClass('ui-widget-header');
+    $('#cluetip-inner').addClass('ui-widget-content');
     $('#trainer').fadeIn();
   }
 
