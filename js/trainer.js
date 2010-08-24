@@ -345,27 +345,32 @@ function TrainerUI() {
         power_index = discipline_node.find('.power').index(power) + 1,
         power_level = parseInt(power.find('.level').text());
 
-    if ($(this).hasClass('disabled')) {
-      if (power_level == discipline.current_power_limit) {
-        self.notify_error('Power is at maximum level');
+    if ($(power).hasClass('available')) {
+      if ($(this).hasClass('disabled')) {
+        if (power_level == discipline.current_power_limit) {
+          self.notify_error('Power is at maximum level');
+        } else {
+          self.notify_error('Not enough power points');
+        }
       } else {
-        self.notify_error('Not enough power points');
+        self.set_power_level(discipline_name, power_index, power_level + 1);
       }
-    } else {
-      self.set_power_level(discipline_name, power_index, power_level + 1);
     }
   }
 
   this.decrease_power_level = function(source) {
-    if ($(this).hasClass('disabled')) {
-      self.notify_error('Power is at minimum level');
-    } else {
-      var discipline = $(this).parents('.discipline'),
-          discipline_name = discipline.find('.name').text();
-          power = $(this).parents('.power'),
-          power_index = discipline.find('.power').index(power) + 1,
-          power_level = parseInt(power.find('.level').text());
-      self.set_power_level(discipline_name, power_index, power_level - 1);
+    var discipline = $(this).parents('.discipline'),
+        discipline_name = discipline.find('.name').text();
+        power = $(this).parents('.power'),
+        power_index = discipline.find('.power').index(power) + 1,
+        power_level = parseInt(power.find('.level').text());
+
+    if ($(power).hasClass('available')) {
+      if ($(this).hasClass('disabled')) {
+        self.notify_error('Power is at minimum level');
+      } else {
+        self.set_power_level(discipline_name, power_index, power_level - 1);
+      }
     }
   }
 
