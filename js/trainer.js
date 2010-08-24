@@ -464,7 +464,8 @@ function TrainerUI() {
         $(element).find('.metadata .ui-icon').removeClass('disabled');
         if (setup.config.min_discipline_level == discipline.current_level) {
           $(element).find('.metadata .ui-icon-triangle-1-s').addClass('disabled');
-        } else if (setup.config.max_discipline_level == discipline.current_level
+        } 
+        if ((setup.config.max_discipline_level == discipline.current_level)
           || !setup.valid_discipline_level(discipline, discipline.current_level + 2)) {
           $(element).find('.metadata .ui-icon-triangle-1-n').addClass('disabled');
         }
