@@ -449,9 +449,9 @@ function TrainerUI() {
 
     self.update_permalink();
 
-    metadata.find('.discipline_points .used').text(setup.config.discipline_points_used);
+    metadata.find('.discipline_points .left').text(setup.config.discipline_points_left());
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
-    metadata.find('.power_points .used').text(setup.config.power_points_used);
+    metadata.find('.power_points .left').text(setup.config.power_points_left());
     metadata.find('.power_points .total').text(setup.config.power_points_total);
     metadata.find('.level').text(setup.get_character_level());
 
