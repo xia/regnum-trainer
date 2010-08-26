@@ -253,6 +253,8 @@ function Trainer() {
 
     $.each(disciplines, function(index, discipline) {
         discipline.current_level = Math.min(discipline.current_level, self.config.max_discipline_level);
+        discipline.current_power_limit =
+          self.config.max_power_level[discipline.current_level-1];
         dp_total += self.config.discipline_required_points[discipline.current_level-1];
         $.each(discipline.spells, function(power_index, power) {
           power.current_level = Math.min(power.current_level, self.power_limit(discipline, power_index));
