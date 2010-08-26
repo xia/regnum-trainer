@@ -287,7 +287,11 @@ function Trainer() {
 }
 
 function TrainerUI() {
-  var self = this;
+  var self = this,
+      edit_mode_class = 'edit_mode_control',
+      view_mode_class = 'view_mode_control',
+      view_mode_data = 'view_mode_data',
+      mode_list_selector = '#trainer select, #tool_options select');
 
   this.setup = new Trainer();
 
@@ -309,24 +313,19 @@ function TrainerUI() {
   }
 
   this.set_edit_mode = function() {
-    $('.view_mode_control').hide();
-    $('.edit_mode_control').show();
-    $('.controls').show();
-    $('#trainer select, #tool_option select').each(function() {
-        var element = $(this), p = element.parent();
-        p.remove('.view_mode_data');
-        element.show();
-        });
+    $('.' + view_mode_class).hide();
+    $('.' + edit_mode_class).show();
+    $('.' + view_mode_data).remove();
+    $(mode_list_selector).show();
   }
 
   this.set_view_mode = function() {
     if (self.setup.is_valid()) {
-      $('.view_mode_control').show();
-      $('.edit_mode_control').hide();
-      $('.controls').hide();
-      $('#trainer select, #tool_options select').each(function() {
+      $('.' + view_mode_class).show();
+      $('.' + edit_mode_class).hide();
+      $(mode_list_selector).each(function() {
           var element = $(this), p = element.parent();
-          p.append($('<span>').addClass('view_mode_data').text(element.find('option:selected').text()));
+          p.append($('<span>').addClass(view_mode_data).text(element.find('option:selected').text()));
           element.hide();
           });
     } else {
@@ -465,6 +464,7 @@ function TrainerUI() {
             .append($('<div>').addClass('level')),
           control_block = $('<div>').addClass('ui-icon'),
           controls_block = $('<div>').addClass('controls')
+            .addClass(edit_mode_class)
             .append(control_block.clone().addClass('increase_level ui-icon-triangle-1-n'))
             .append(control_block.clone().addClass('decrease_level ui-icon-triangle-1-s')),
           powers_block = $('<div>').addClass('powers'),
@@ -664,6 +664,11 @@ $(function() {
   $('#char_level').change(function() {
     T.set_character_level($(this).val());
     });
+
+  $('#edit_setup').click(function() {
+      T.set_edit_mode();
+      return false;
+      });
 
   $('#reset_powers').click(function() {
       T.reset_powers();
