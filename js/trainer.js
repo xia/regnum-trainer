@@ -503,7 +503,7 @@ function TrainerUI() {
         }
 
         $(element).find('.power').each(function(power_index, element) {
-          var power_level = power_index * 2 + 1;
+          var power_position = power_index * 2 + 1;
           power_limit = setup.power_limit(discipline, power_index),
           power = discipline.spells[power_index];
 
@@ -511,7 +511,7 @@ function TrainerUI() {
 
           /* redraw icons */
           $(element).removeClass('available activated valid invalid');
-          if (power_level <= discipline.current_level) {
+          if (power_position <= discipline.current_level) {
             $(element).addClass('available');
             if (power.current_level > 0) {
               $(element).addClass('activated');
