@@ -2,6 +2,16 @@ html {
   overflow-y: scroll;
 }
 
+#statusbar {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  opacity: 0.8;
+  filter: alpha(opacity=80);
+  text-align: center;
+}
+
 #trainer_ui .p0 .icon {
   background-position: 0px 0px;
 }
