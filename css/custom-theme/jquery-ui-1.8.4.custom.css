@@ -50,7 +50,7 @@
  *
  * http://docs.jquery.com/UI/Theming/API
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana,Arial,sans-serif&fwDefault=normal&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=b39a4b&bgTextureHeader=03_highlight_soft.png&bgImgOpacityHeader=75&borderColorHeader=aaaaaa&fcHeader=222222&iconColorHeader=222222&bgColorContent=000000&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=efc235&iconColorContent=222222&bgColorDefault=efc235&bgTextureDefault=02_glass.png&bgImgOpacityDefault=75&borderColorDefault=f7de8d&fcDefault=000000&iconColorDefault=9b7a11&bgColorHover=f7d467&bgTextureHover=02_glass.png&bgImgOpacityHover=75&borderColorHover=f7de8d&fcHover=9b7a11&iconColorHover=b39a4b&bgColorActive=f7de8d&bgTextureActive=02_glass.png&bgImgOpacityActive=65&borderColorActive=f7de8d&fcActive=212121&iconColorActive=454545&bgColorHighlight=222222&bgTextureHighlight=01_flat.png&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=f7de8d&iconColorHighlight=f7de8d&bgColorError=222222&bgTextureError=01_flat.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=cd0a0a&iconColorError=cd0a0a&bgColorOverlay=b39a4b&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=b39a4b&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana,Arial,sans-serif&fwDefault=normal&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=b39a4b&bgTextureHeader=03_highlight_soft.png&bgImgOpacityHeader=75&borderColorHeader=aaaaaa&fcHeader=222222&iconColorHeader=222222&bgColorContent=000000&bgTextureContent=01_flat.png&bgImgOpacityContent=75&borderColorContent=aaaaaa&fcContent=efc235&iconColorContent=222222&bgColorDefault=efc235&bgTextureDefault=02_glass.png&bgImgOpacityDefault=75&borderColorDefault=f7de8d&fcDefault=000000&iconColorDefault=9b7a11&bgColorHover=f7d467&bgTextureHover=02_glass.png&bgImgOpacityHover=75&borderColorHover=f7de8d&fcHover=9b7a11&iconColorHover=b39a4b&bgColorActive=f7de8d&bgTextureActive=02_glass.png&bgImgOpacityActive=65&borderColorActive=f7de8d&fcActive=212121&iconColorActive=454545&bgColorHighlight=b39a4b&bgTextureHighlight=01_flat.png&bgImgOpacityHighlight=55&borderColorHighlight=fcefa1&fcHighlight=f7de8d&iconColorHighlight=f7de8d&bgColorError=cd0a0a&bgTextureError=01_flat.png&bgImgOpacityError=95&borderColorError=cd0a0a&fcError=f7de8d&iconColorError=f7de8d&bgColorOverlay=b39a4b&bgTextureOverlay=01_flat.png&bgImgOpacityOverlay=0&opacityOverlay=30&bgColorShadow=b39a4b&bgTextureShadow=01_flat.png&bgImgOpacityShadow=0&opacityShadow=30&thicknessShadow=8px&offsetTopShadow=-8px&offsetLeftShadow=-8px&cornerRadiusShadow=8px
  */
 
 
@@ -76,11 +76,11 @@
 
 /* Interaction Cues
 ----------------------------------*/
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #fcefa1; background: #222222 url(images/ui-bg_flat_55_222222_40x100.png) 50% 50% repeat-x; color: #f7de8d; }
+.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight  {border: 1px solid #fcefa1; background: #b39a4b url(images/ui-bg_flat_55_b39a4b_40x100.png) 50% 50% repeat-x; color: #f7de8d; }
 .ui-state-highlight a, .ui-widget-content .ui-state-highlight a,.ui-widget-header .ui-state-highlight a { color: #f7de8d; }
-.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #222222 url(images/ui-bg_flat_95_222222_40x100.png) 50% 50% repeat-x; color: #cd0a0a; }
-.ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #cd0a0a; }
-.ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text { color: #cd0a0a; }
+.ui-state-error, .ui-widget-content .ui-state-error, .ui-widget-header .ui-state-error {border: 1px solid #cd0a0a; background: #cd0a0a url(images/ui-bg_flat_95_cd0a0a_40x100.png) 50% 50% repeat-x; color: #f7de8d; }
+.ui-state-error a, .ui-widget-content .ui-state-error a, .ui-widget-header .ui-state-error a { color: #f7de8d; }
+.ui-state-error-text, .ui-widget-content .ui-state-error-text, .ui-widget-header .ui-state-error-text { color: #f7de8d; }
 .ui-priority-primary, .ui-widget-content .ui-priority-primary, .ui-widget-header .ui-priority-primary { font-weight: bold; }
 .ui-priority-secondary, .ui-widget-content .ui-priority-secondary,  .ui-widget-header .ui-priority-secondary { opacity: .7; filter:Alpha(Opacity=70); font-weight: normal; }
 .ui-state-disabled, .ui-widget-content .ui-state-disabled, .ui-widget-header .ui-state-disabled { opacity: .35; filter:Alpha(Opacity=35); background-image: none; }
@@ -96,7 +96,7 @@
 .ui-state-hover .ui-icon, .ui-state-focus .ui-icon {background-image: url(images/ui-icons_b39a4b_256x240.png); }
 .ui-state-active .ui-icon {background-image: url(images/ui-icons_454545_256x240.png); }
 .ui-state-highlight .ui-icon {background-image: url(images/ui-icons_f7de8d_256x240.png); }
-.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(images/ui-icons_cd0a0a_256x240.png); }
+.ui-state-error .ui-icon, .ui-state-error-text .ui-icon {background-image: url(images/ui-icons_f7de8d_256x240.png); }
 
 /* positioning */
 .ui-icon-carat-1-n { background-position: 0 0; }
@@ -292,7 +292,7 @@
 
 /* Overlays */
 .ui-widget-overlay { background: #b39a4b url(images/ui-bg_flat_0_b39a4b_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); }
-.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #b39a4b url(images/ui-bg_flat_0_b39a4b_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }/*
+.ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #b39a4b url(images/ui-bg_flat_0_b39a4b_40x100.png) 50% 50% repeat-x; opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
  * jQuery UI Accordion @VERSION
  *
  * Copyright 2010, AUTHORS.txt (http://jqueryui.com/about)
