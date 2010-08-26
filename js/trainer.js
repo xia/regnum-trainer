@@ -75,9 +75,9 @@ function Trainer() {
   }
 
   this.decode = function(code, callback) {
-    var version = known_versions[encodeChars.indexOf(code[0])],
-        klass = class_types[encodeChars.indexOf(code[1])],
-        level = encodeChars.indexOf(code[2]) + 1;
+    var version = known_versions[Math.max(0, encodeChars.indexOf(code[0]))],
+        klass = class_types[Math.max(0, encodeChars.indexOf(code[1]))],
+        level = Math.max(0, encodeChars.indexOf(code[2])) + 1;
 
     self.load_data(version, klass, level, function() {
         var discipline_index = 0;
@@ -125,7 +125,7 @@ function Trainer() {
   this.set_discipline_level = function(discipline_name, level) {
     var discipline = self.config.disciplines[discipline_name];
     if (discipline) {
-      discipline.current_level = Math.min(level, self.config.max_discipline_level);
+      discipline.current_level = Math.max(self.config.min_discipline_level, Math.min(self.config.max_discipline_level, level));
       discipline.current_power_limit =
         self.config.max_power_level[discipline.current_level-1];
       reset_points();
@@ -136,7 +136,7 @@ function Trainer() {
     var discipline = self.config.disciplines[discipline_name];
     if (discipline) {
       power = discipline.spells[power_index-1];
-      power.current_level = Math.min(level, discipline.current_power_limit);
+      power.current_level = Math.max(self.config.min_power_level, Math.min(discipline.current_power_limit, level));
       reset_points();
     }
   }
