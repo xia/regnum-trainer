@@ -40,6 +40,10 @@
               return false;
             });
 
+          $('#char_level').change(function() {
+            T.set_character_level($(this).val());
+            });
+
           if ($.query.get('s')) {
             T.decode($.query.get('s'), function() {
                 $('#game_version').val(T.setup.get_game_version());
