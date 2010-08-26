@@ -449,7 +449,11 @@ function TrainerUI() {
   }
 
   this.notify_error = function(message) {
-    alert(message);
+    $('#statusbar').addClass('ui-state-error').text(message).slideDown('fast', function() {
+          setTimeout(function() {
+            $('#statusbar').slideUp('slow')
+            }, 1800)
+        });
   }
 
   function reset_ui() {
@@ -643,6 +647,7 @@ var T = new TrainerUI();
 $(function() {
   $('#trainer').hide();
   $('#trainer_actions a').button();
+  $('body').append($('<span>').attr('id', 'statusbar').addClass('ui-state-hidden'));
 
   $('#tool_option_submit').click(function() {
       if (!$('#game_version').val()) {
