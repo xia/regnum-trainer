@@ -62,7 +62,7 @@ function Trainer() {
       + encodeChars.charAt(character_level - 1);
 
     $.each(self.config.disciplines, function(index, discipline) {
-      var num;
+      var s, num;
       code += encodeChars.charAt(discipline.current_level);
       for (s = 1; s <= 10; s += 2) {
         num = discipline.spells[s - 1].current_level * 6
