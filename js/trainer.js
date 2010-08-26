@@ -529,7 +529,7 @@ function TrainerUI() {
           if (setup.config.min_power_level == power.current_level) {
             $(element).find('.ui-icon-triangle-1-s').addClass('disabled');
           }
-          if (power.current_level == power_limit || 0 == self.setup.power_points_left()) {
+          if (power.current_level == power_limit || 0 >= self.setup.power_points_left()) {
             $(element).find('.ui-icon-triangle-1-n').addClass('disabled');
           }
         });
