@@ -300,6 +300,11 @@ function TrainerUI() {
         });
   }
 
+  this.set_character_level = function(level) {
+    self.setup.set_character_level(level);
+    reset_controls();
+  }
+
   this.set_discipline_level = function(discipline_name, level) {
     self.setup.set_discipline_level(discipline_name, level);
     reset_controls();
