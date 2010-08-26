@@ -20,6 +20,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with INQ Calculators.  If not, see <http://www.gnu.org/licenses/>.
  */
+(function($) {
 function lookup(obj, key, default_) {
   return obj[key] || default_;
 }
@@ -27,7 +28,6 @@ function lookup(obj, key, default_) {
 function Trainer() {
   var self = this,
       encodeChars = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNOPQRSTUVWXYZ",
-      encodeBase = 6,
       max_character_level = 50,
       class_type_masks = {
         'archer':0x10, 'hunter':0x11, 'marksman':0x12,
@@ -62,9 +62,10 @@ function Trainer() {
       + encodeChars.charAt(character_level - 1);
 
     $.each(self.config.disciplines, function(index, discipline) {
+      var num;
       code += encodeChars.charAt(discipline.current_level);
-      for (var s = 1; s <= 10; s += 2) {
-        var num = discipline.spells[s - 1].current_level * 6
+      for (s = 1; s <= 10; s += 2) {
+        num = discipline.spells[s - 1].current_level * 6
                 + discipline.spells[s].current_level;
         code += encodeChars.charAt(num);
       }
@@ -164,8 +165,8 @@ function Trainer() {
     return self.config.power_points_total - self.config.power_points_used;
   }
 
-  this.set_character_level = function(level) {
-    var level = parseInt(level);
+  this.set_character_level = function(level_) {
+    var level = parseInt(level_);
     if (!isNaN(level)) { 
       character_level = Math.min(level, max_character_level);
     } else {
@@ -194,8 +195,8 @@ function Trainer() {
     }
   }
 
-  function set_character_class(c) {
-    var c = c.toLowerCase();
+  function set_character_class(c_) {
+    var c = c_.toLowerCase();
     if ($.inArray(c, class_types)) {
       character_class = c;
     }
@@ -404,10 +405,10 @@ function TrainerUI() {
   }
 
   this.reset_events = function() {
-    $('.discipline .metadata .increase_level').click(T.increase_discipline_level);
-    $('.discipline .metadata .decrease_level').click(T.decrease_discipline_level);
-    $('.discipline .powers .increase_level').click(T.increase_power_level);
-    $('.discipline .powers .decrease_level').click(T.decrease_power_level);
+    $('.discipline .metadata .increase_level').click(self.increase_discipline_level);
+    $('.discipline .metadata .decrease_level').click(self.decrease_discipline_level);
+    $('.discipline .powers .increase_level').click(self.increase_power_level);
+    $('.discipline .powers .decrease_level').click(self.decrease_power_level);
     $('.power').each(function(index, power) {
         $(power).cluetip({ local: true, positionBy: 'bottomTop' });
       });
@@ -422,7 +423,7 @@ function TrainerUI() {
   }
 
   function reset_ui() {
-    var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+    var setup = self.setup, ui = $('#trainer_ui');
 
     ui.empty();
     $.each(setup.config.disciplines, function(discipline_name, discipline) {
@@ -464,7 +465,7 @@ function TrainerUI() {
   }
 
   function reset_controls() {
-    var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
+    var setup = self.setup, metadata = $('#trainer_metadata');
 
     $('#char_level').val(setup.get_character_level());
 
@@ -586,7 +587,7 @@ function TrainerUI() {
           });
     } else {
       name.removeClass('spec_label');
-      for (var spec in v) {
+      for (spec in v) {
         if (v[spec] === true) {
           value.append(spec);
         } else {
@@ -604,3 +605,37 @@ function TrainerUI() {
   }
 }
 
+var T = new TrainerUI();
+
+$(function() {
+  $('#trainer').hide();
+  $('#permalink').button();
+
+  $('#tool_option_submit').click(function() {
+      if (!$('#game_version').val()) {
+        $('#game_version').effect('highlight', {}, 2000);
+        T.notify_error('Please select a game version.');
+      } else if (!$('#char_class').val()) {
+        $('#char_class').effect('highlight', {}, 2000);
+        T.notify_error('Please select a character class.');
+      } else {
+        $('#trainer').hide();
+        T.load_data($('#game_version').val(), $('#char_class').val(), T.reset_events);
+      }
+      return false;
+    });
+
+  $('#char_level').change(function() {
+    T.set_character_level($(this).val());
+    });
+
+  if ($.query.get('s')) {
+    T.decode($.query.get('s'), function() {
+        $('#game_version').val(T.setup.get_game_version());
+        $('#char_class').val(T.setup.get_character_class());
+
+      });
+  }
+});
+
+})(jQuery);
