@@ -291,7 +291,7 @@ function TrainerUI() {
       edit_mode_class = 'edit_mode_control',
       view_mode_class = 'view_mode_control',
       view_mode_data = 'view_mode_data',
-      mode_list_selector = '#trainer select, #tool_options select');
+      mode_list_selector = '#trainer select, #tool_options select';
 
   this.setup = new Trainer();
 
