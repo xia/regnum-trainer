@@ -47,9 +47,17 @@ html {
 }
 
 #trainer {
-  width: 864px;
   clear: both;
+  float: left;
+  position: relative;
+  left: 50%;
   margin: 0 auto;
+}
+
+#trainer_form {
+  float: left;
+  position: relative;
+  left: -50%;
 }
 
 #trainer_actions {
@@ -75,7 +83,8 @@ html {
 }
 
 #trainer_ui .discipline {
-  margin: 0.5em 0;
+  display: block;
+  margin: 0.25em 0;
 }
 
 #trainer_ui .discipline .metadata {
@@ -83,7 +92,7 @@ html {
   border-bottom: 1px #ffffff dashed;
   border-left: 1px #ffffff dashed;
   float: left;
-  margin: 0.5em 0;
+  margin: 0.25em 0;
   padding: 1px 0.5em 1px 1em;
 }
 
@@ -104,9 +113,13 @@ html {
   display: inline-block;
 }
 
+#trainer_ui .powers {
+  display: inline-block;
+}
+
 #trainer_ui .power {
   display: inline-block;
-  margin: 0.5em 0;
+  margin: 0.25em 0;
   padding: 1px 0;
   border-top: 1px #000000 solid;
   border-bottom: 1px #000000 solid;
