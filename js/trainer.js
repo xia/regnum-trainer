@@ -113,10 +113,10 @@ function Trainer() {
   }
 
   this.reset_powers = function() {
-    $.each(self.config.disciplines, function(index, discipline) {
-        this.set_discipline_level(discipline.name, self.config.min_discipline_level);
+    $.each(self.config.disciplines, function(discipline_name, discipline) {
+        self.set_discipline_level(discipline_name, self.config.min_discipline_level);
         $.each(discipline.spells, function(index, power) {
-          this.set_power_level(discipline.name, index + 1, self.config.min_power_level);
+          self.set_power_level(discipline_name, index + 1, self.config.min_power_level);
           });
         });
     reset_points();
@@ -332,6 +332,11 @@ function TrainerUI() {
     } else {
       self.set_edit_mode();
     }
+  }
+
+  this.reset_powers = function(level) {
+    self.setup.reset_powers();
+    reset_controls();
   }
 
   this.set_character_level = function(level) {
@@ -659,6 +664,11 @@ $(function() {
   $('#char_level').change(function() {
     T.set_character_level($(this).val());
     });
+
+  $('#reset_powers').click(function() {
+      T.reset_powers();
+      return false;
+      });
 
   if ($.query.get('s')) {
     T.decode($.query.get('s'), function() {
