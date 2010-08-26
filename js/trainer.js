@@ -315,6 +315,7 @@ function TrainerUI() {
   }
 
   this.set_edit_mode = function() {
+    $('#comments').remove();
     $('.' + view_mode_class).hide();
     $('.' + edit_mode_class).show();
     $('.' + view_mode_data).remove();
