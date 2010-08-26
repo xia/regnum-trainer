@@ -167,6 +167,7 @@ function Trainer() {
       character_level = max_character_level;
     }
     reset_limits();
+    reset_points();
   }
 
   this.get_character_level = function() {
