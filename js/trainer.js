@@ -453,7 +453,7 @@ function TrainerUI() {
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
     metadata.find('.power_points .left').text(setup.power_points_left());
     metadata.find('.power_points .total').text(setup.config.power_points_total);
-    metadata.find('.level').text(setup.get_character_level());
+    metadata.find('#char_level').val(setup.get_character_level());
 
     $('.discipline').each(function(index, element) {
         var discipline_name = $(element).find('.name').text(),
