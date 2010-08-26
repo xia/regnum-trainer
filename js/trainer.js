@@ -291,8 +291,8 @@ function TrainerUI() {
 
   this.setup = new Trainer();
 
-  this.load_data = function(game_version, character_class, callback) {
-    this.setup.load_data(game_version, character_class, function() {
+  this.load_data = function(game_version, character_class, character_level, callback) {
+    this.setup.load_data(game_version, character_class, character_level, function() {
       reset_ui();
       if ($.isFunction(callback)) {
         callback.apply(self);
@@ -620,9 +620,12 @@ $(function() {
       } else if (!$('#char_class').val()) {
         $('#char_class').effect('highlight', {}, 2000);
         T.notify_error('Please select a character class.');
+      } else if (!$('#char_level').val()) {
+        $('#char_level').effect('highlight', {}, 2000);
+        T.notify_error('Please select a character level.');
       } else {
         $('#trainer').hide();
-        T.load_data($('#game_version').val(), $('#char_class').val(), T.reset_events);
+        T.load_data($('#game_version').val(), $('#char_class').val(), $('#char_level').val(), T.reset_events);
       }
       return false;
     });
