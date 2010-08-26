@@ -308,6 +308,32 @@ function TrainerUI() {
         });
   }
 
+  this.set_edit_mode = function() {
+    $('.view_mode_control').hide();
+    $('.edit_mode_control').show();
+    $('.controls').show();
+    $('#trainer select, #tool_option select').each(function() {
+        var element = $(this), p = element.parent();
+        p.remove('.view_mode_data');
+        element.show();
+        });
+  }
+
+  this.set_view_mode = function() {
+    if (self.setup.is_valid()) {
+      $('.view_mode_control').show();
+      $('.edit_mode_control').hide();
+      $('.controls').hide();
+      $('#trainer select, #tool_options select').each(function() {
+          var element = $(this), p = element.parent();
+          p.append($('<span>').addClass('view_mode_data').text(element.find('option:selected').text()));
+          element.hide();
+          });
+    } else {
+      self.set_edit_mode();
+    }
+  }
+
   this.set_character_level = function(level) {
     self.setup.set_character_level(level);
     reset_controls();
@@ -611,7 +637,7 @@ var T = new TrainerUI();
 
 $(function() {
   $('#trainer').hide();
-  $('#permalink').button();
+  $('#trainer_actions a').button();
 
   $('#tool_option_submit').click(function() {
       if (!$('#game_version').val()) {
@@ -638,8 +664,10 @@ $(function() {
     T.decode($.query.get('s'), function() {
         $('#game_version').val(T.setup.get_game_version());
         $('#char_class').val(T.setup.get_character_class());
-
+        T.set_view_mode();
       });
+  } else {
+    T.set_edit_mode();
   }
 });
 
