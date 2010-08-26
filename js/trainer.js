@@ -447,13 +447,23 @@ function TrainerUI() {
   function reset_controls() {
     var setup = self.setup, metadata = $('#trainer_metadata'), ui = $('#trainer_ui');
 
-    self.update_permalink();
+    $('#char_level').val(setup.get_character_level());
 
-    metadata.find('.discipline_points .left').text(setup.discipline_points_left());
+    if (setup.discipline_points_left() < 0) {
+      metadata.find('.discipline_points .left').text(setup.discipline_points_left()).addClass('invalid');
+    } else {
+      metadata.find('.discipline_points .left').text(setup.discipline_points_left()).removeClass('invalid');
+    }
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
-    metadata.find('.power_points .left').text(setup.power_points_left());
+
+    if (setup.power_points_left() < 0) {
+      metadata.find('.power_points .left').text(setup.power_points_left()).addClass('invalid');
+    } else {
+      metadata.find('.power_points .left').text(setup.power_points_left()).removeClass('invalid');
+    }
     metadata.find('.power_points .total').text(setup.config.power_points_total);
-    metadata.find('#char_level').val(setup.get_character_level());
+
+    self.update_permalink();
 
     $('.discipline').each(function(index, element) {
         var discipline_name = $(element).find('.name').text(),

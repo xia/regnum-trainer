@@ -69,6 +69,11 @@ html {
   font-weight: bold;
 }
 
+#trainer_metadata .invalid {
+  color: #f00;
+  font-weight: bold;
+}
+
 #trainer_ui .discipline {
   margin: 0.5em 0;
 }
