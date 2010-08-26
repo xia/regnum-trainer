@@ -469,19 +469,21 @@ function TrainerUI() {
 
     $('#char_level').val(setup.get_character_level());
 
-    if (setup.discipline_points_left() < 0) {
-      metadata.find('.discipline_points .left').text(setup.discipline_points_left()).addClass('invalid');
-    } else {
-      metadata.find('.discipline_points .left').text(setup.discipline_points_left()).removeClass('invalid');
-    }
+    metadata.find('.discipline_points .left').text(setup.discipline_points_left());
     metadata.find('.discipline_points .total').text(setup.config.discipline_points_total);
-
-    if (setup.power_points_left() < 0) {
-      metadata.find('.power_points .left').text(setup.power_points_left()).addClass('invalid');
+    if (setup.discipline_points_left() < 0) {
+      metadata.find('.discipline_points').addClass('invalid');
     } else {
-      metadata.find('.power_points .left').text(setup.power_points_left()).removeClass('invalid');
+      metadata.find('.discipline_points').removeClass('invalid');
     }
+
+    metadata.find('.power_points .left').text(setup.power_points_left());
     metadata.find('.power_points .total').text(setup.config.power_points_total);
+    if (setup.power_points_left() < 0) {
+      metadata.find('.power_points').addClass('invalid');
+    } else {
+      metadata.find('.power_points').removeClass('invalid');
+    }
 
     self.update_permalink();
 
