@@ -106,6 +106,11 @@ function Trainer() {
         });
   }
 
+  this.is_valid = function() {
+    return !(self.discipline_points_left() < 0)
+      && !(self.power_points_left() < 0);
+  }
+
   this.reset_powers = function() {
     $.each(self.config.disciplines, function(index, discipline) {
         this.set_discipline_level(discipline.name, self.config.min_discipline_level);
@@ -388,7 +393,14 @@ function TrainerUI() {
   }
 
   this.update_permalink = function() {
-    return $('#permalink').attr('href', self.permalink());
+    var p = $('#permalink');
+    if (self.setup.is_valid()) {
+      p.show();
+    } else {
+      p.hide();
+    }
+
+    return p.attr('href', self.permalink());
   }
 
   this.reset_events = function() {
