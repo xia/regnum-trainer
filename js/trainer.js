@@ -197,7 +197,7 @@ function Trainer() {
 
   function set_character_class(c_) {
     var c = c_.toLowerCase();
-    if ($.inArray(c, class_types)) {
+    if ($.inArray(c, class_types) > -1) {
       character_class = c;
     }
   }
