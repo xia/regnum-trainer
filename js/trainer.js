@@ -673,7 +673,7 @@ $(function() {
     T.set_character_level($(this).val());
     });
 
-  $('#edit_setup').click(function() {
+  $('#copy_setup').click(function() {
       T.set_edit_mode();
       return false;
       });
