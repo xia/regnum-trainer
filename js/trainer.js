@@ -35,7 +35,7 @@ function Trainer() {
         'warrior':0x40, 'barbarian':0x41, 'knight':0x42
       },
       class_types = [ 'archer', 'hunter', 'marksman', 'mage', 'conjurer', 'warlock', 'warrior', 'barbarian', 'knight' ],
-      known_versions = [ '1.6.2', '1.7_beta1' ],
+      known_versions = [ '1.6.2', '1.6.3' ],
       class_mask = 0xF0,
       game_version = null,
       character_class = null,

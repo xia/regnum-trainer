@@ -165,11 +165,6 @@ html {
   filter: alpha(opacity=50);
 }
 
-#trainer_ui .power.available .icon {
-  opacity: 0.25;
-  filter: alpha(opacity=25);
-}
-
 #trainer_ui .power.activated .icon,
 #trainer_ui .power.available .controls {
   opacity: 1;
