@@ -587,7 +587,9 @@ function TrainerUI() {
       if (power.duration) {
         specs.append(spec_block('Duration', power.duration));
       }
-      specs.append(spec_block('Cost', power.mana));
+      if (power.mana) {
+        specs.append(spec_block('Cost', power.mana));
+      }
       specs.append(spec_block('Casting', power.cast || 'Instant'));
       specs.append(spec_block('Cooldown', power.cooldown || 'Unknown'));
       if (power.gcd) {
