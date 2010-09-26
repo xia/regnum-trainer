@@ -442,7 +442,7 @@ function TrainerUI() {
     $('.discipline .metadata .decrease_level').click(self.decrease_discipline_level);
     $('.discipline .powers .increase_level').click(self.increase_power_level);
     $('.discipline .powers .decrease_level').click(self.decrease_power_level);
-    $('.power').each(function(index, power) {
+    $('.power .icon').each(function(index, power) {
         $(power).cluetip({
           activation: 'click',
           local: true,
@@ -494,9 +494,9 @@ function TrainerUI() {
         $.each(discipline.spells, function(power_index, power) {
           var pword = power.name.replace(/ /g, '_'),
               pid = dword + '-' + pword.replace(/[^A-Za-z0-9]/g, '_'),
-              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name).attr('rel', '#' + pid);
+              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name);
 
-          block.append(icon_block.clone());
+          block.append(icon_block.clone().attr('rel', '#' + pid));
           block.append(controls_block.clone());
           powers_block.append(block);
           powers_block.append(tooltip_block(power).attr('id', pid));
