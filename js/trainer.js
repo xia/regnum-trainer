@@ -587,7 +587,9 @@ function TrainerUI() {
       if (power.duration) {
         specs.append(spec_block('Duration', power.duration));
       }
-      specs.append(spec_block('Cost', power.mana));
+      if (power.mana) {
+        specs.append(spec_block('Cost', power.mana));
+      }
       specs.append(spec_block('Casting', power.cast || 'Instant'));
       specs.append(spec_block('Cooldown', power.cooldown || 'Unknown'));
       if (power.gcd) {
@@ -673,7 +675,7 @@ $(function() {
     T.set_character_level($(this).val());
     });
 
-  $('#edit_setup').click(function() {
+  $('#copy_setup').click(function() {
       T.set_edit_mode();
       return false;
       });
