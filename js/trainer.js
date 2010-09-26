@@ -443,8 +443,15 @@ function TrainerUI() {
     $('.discipline .powers .increase_level').click(self.increase_power_level);
     $('.discipline .powers .decrease_level').click(self.decrease_power_level);
     $('.power').each(function(index, power) {
-        $(power).cluetip({ local: true, positionBy: 'bottomTop' });
+        $(power).cluetip({
+          activation: 'click',
+          local: true,
+          positionBy: 'bottomTop',
+          sticky: true,
+          closePosition: 'title'
+        });
       });
+    $('#cluetip').draggable();
     $('#cluetip-outer').addClass('ui-widget');
     $('#cluetip-title').addClass('ui-widget-header');
     $('#cluetip-inner').addClass('ui-widget-content');
