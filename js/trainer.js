@@ -638,7 +638,7 @@ function TrainerUI() {
       name.removeClass('spec_label');
       for (spec in v) {
         if (v[spec] === true) {
-          value.append(spec);
+          value.append($('<div>').append(spec));
         } else {
           value.append(spec_block(spec, v[spec]));
         }
