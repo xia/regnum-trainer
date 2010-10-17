@@ -494,9 +494,9 @@ function TrainerUI() {
         $.each(discipline.spells, function(power_index, power) {
           var pword = power.name.replace(/ /g, '_'),
               pid = dword + '-' + pword.replace(/[^A-Za-z0-9]/g, '_'),
-              block = $('<div>').addClass('power p' + (power_index+1)).attr('title', power.name);
+              block = $('<div>').addClass('power p' + (power_index+1));
 
-          block.append(icon_block.clone().attr('rel', '#' + pid));
+          block.append(icon_block.clone().attr('rel', '#' + pid).attr('title', power.name));
           block.append(controls_block.clone());
           powers_block.append(block);
           powers_block.append(tooltip_block(power).attr('id', pid));
